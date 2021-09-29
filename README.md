@@ -43,4 +43,4 @@ HTML, CSS
 
 ## GitHub Pages ##
 
-[Посмотреть проект на GitHub Pages](https://khaov.github.io/mesto-project "Проект «Mesto»")
+[Посмотреть проект на GitHub Pages](https://khaov.github.io/mesto-project/index.html "Проект «Mesto»")
