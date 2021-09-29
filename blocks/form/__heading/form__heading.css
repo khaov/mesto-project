@@ -5,3 +5,10 @@
   font-weight: 900;
   color: #000;
 }
+
+@media screen and (max-width: 767px) {
+  .form__heading {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}

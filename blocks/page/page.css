@@ -8,8 +8,15 @@
     "footer";
   justify-content: center;
   min-height: 100vh;
+  padding: 0 19px;
   background-color: #000;
   font-family: 'Inter', 'Arial', sans-serif;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
+}
+
+@media screen and (max-width: 767px) {
+  .page {
+    padding: 0;
+  }
 }

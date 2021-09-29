@@ -31,11 +31,14 @@
         <!-- Profile -->
 
         <section class="profile">
-          <img class="profile__avatar" src="images/profile-avatar.jpg" alt="Фото профиля Жак-Ив Кусто">
+          <img class="profile__avatar" src="images/profile-avatar.jpg" alt="Фото профиля">
           <div class="profile__info">
-            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <div class="profile__heading">
+              <h1 class="profile__name">Жак-Ив Кусто</h1>
+              <button class="profile__edit-button" type="button"></button>
+            </div>
             <p class="profile__description">Исследователь океана</p>
-            <button class="profile__edit-button" type="button"></button>
+
           </div>
           <button class="profile__add-button" type="button"></button>
         </section>
@@ -49,7 +52,7 @@
 
             <li class="gallery__item">
               <figure class="card">
-                <img class="card__image" src="images/card-karachayevsk.jpg" alt="">
+                <img class="card__image" src="images/card-karachayevsk.jpg" alt="Фотография Карачаево-Черкесской Республики">
                 <figcaption class="card__caption">
                   <h2 class="card__name">Карачаевск</h2>
                   <button class="card__like-button" type="button"></button>
@@ -61,7 +64,7 @@
 
             <li class="gallery__item">
               <figure class="card">
-                <img class="card__image" src="images/card-elbrus.jpg" alt="">
+                <img class="card__image" src="images/card-elbrus.jpg" alt="Фотография горы Эльбрус">
                 <figcaption class="card__caption">
                   <h2 class="card__name">Гора Эльбрус</h2>
                   <button class="card__like-button" type="button"></button>
@@ -73,7 +76,7 @@
 
             <li class="gallery__item">
               <figure class="card">
-                <img class="card__image" src="images/card-dombay.jpg" alt="">
+                <img class="card__image" src="images/card-dombay.jpg" alt="Фотография горной территории Домбая">
                 <figcaption class="card__caption">
                   <h2 class="card__name">Домбай</h2>
                   <button class="card__like-button" type="button"></button>
@@ -85,7 +88,7 @@
 
             <li class="gallery__item">
               <figure class="card">
-                <img class="card__image" src="images/card-elbrus.jpg" alt="">
+                <img class="card__image" src="images/card-elbrus.jpg" alt="Фотография горы Эльбрус">
                 <figcaption class="card__caption">
                   <h2 class="card__name">Гора Эльбрус</h2>
                   <button class="card__like-button" type="button"></button>
@@ -97,7 +100,7 @@
 
             <li class="gallery__item">
               <figure class="card">
-                <img class="card__image" src="images/card-dombay.jpg" alt="">
+                <img class="card__image" src="images/card-dombay.jpg" alt="Фотография горной территории Домбая">
                 <figcaption class="card__caption">
                   <h2 class="card__name">Домбай</h2>
                   <button class="card__like-button" type="button"></button>
@@ -109,7 +112,7 @@
 
             <li class="gallery__item">
               <figure class="card">
-                <img class="card__image" src="images/card-karachayevsk.jpg" alt="">
+                <img class="card__image" src="images/card-karachayevsk.jpg" alt="Фотография Карачаево-Черкесской Республики">
                 <figcaption class="card__caption">
                   <h2 class="card__name">Карачаево-Черкессия</h2>
                   <button class="card__like-button card__like-button_active" type="button"></button>
@@ -136,20 +139,19 @@
 
       <!-- Modal -->
 
-      <section class="pop-up">
-        <div class="pop-up__container">
-          <button class="pop-up__close-button"></button>
+      <section class="popup">
+        <div class="popup__container">
+          <button class="popup__close-button"></button>
 
           <!-- Form -->
 
-          <form class="form">
+          <form class="form" name="profile-form">
             <h2 class="form__heading">Редактировать профиль</h2>
             <fieldset class="form__input-container">
               <input class="form__item" type="text" name="profile-name" value="Жак-Ив Кусто" placeholder="Ваше имя">
               <input class="form__item" type="text" name="profile-description" value="Исследователь океана" placeholder="Ваш род занятий">
             </fieldset>
             <button class="form__save-button" type="submit">Сохранить</button>
-            </fieldset>
           </form>
 
         </div>
