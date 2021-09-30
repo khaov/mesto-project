@@ -1,5 +1,7 @@
 .card {
-  margin: 0;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  height: 100%;
   overflow: hidden;
   border-radius: 10px;
   background-color: #fff;
