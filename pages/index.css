@@ -27,11 +27,11 @@
 @import url(../blocks/profile/__description/profile__description.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
 
-/* Gallery */
+/* Cards */
 
-@import url(../blocks/gallery/gallery.css);
-@import url(../blocks/gallery/__list/gallery__list.css);
-@import url(../blocks/gallery/__item/gallery__item.css);
+@import url(../blocks/cards/cards.css);
+@import url(../blocks/cards/__list/cards__list.css);
+@import url(../blocks/cards/__item/cards__item.css);
 
 /* Card */
 @import url(../blocks/card/card.css);

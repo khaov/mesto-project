@@ -1,27 +1,14 @@
-const cardsList = document.querySelector('.gallery__list');
+const cardsList = document.querySelector('.cards__list');
 const cardTemplate = document.querySelector('.card-template').content;
 
-const addButton = document.querySelector('.form__save-button_test');
-
-initialCards.forEach(function (card) {
-  addCard(card.link, card.name);
-})
-
-function addCard(cardImage, titleValue) {
-  const cardElement = cardTemplate.cloneNode(true);
-
-  cardElement.querySelector('.card__image').src = cardImage;
-  cardElement.querySelector('.card__name').textContent = titleValue;
-
-  cardsList.prepend(cardElement);
+function addCard(nameValue, linkValue) {
+  const cardsItem = cardTemplate.cloneNode(true);
+  cardsItem.querySelector('.card__name').textContent = nameValue;
+  cardsItem.querySelector('.card__image').src = linkValue;
+  cardsItem.querySelector('.card__image').alt = nameValue;
+  cardsList.prepend(cardsItem);
 }
 
-addButton.addEventListener('click', function () {
-  const name = document.querySelector('.form__item[name="card-name"]');
-  const link = document.querySelector('.form__item[name="card-link"]');
-
-  addCard(link.value, name.value);
-
-  link.value = '';
-  name.value = '';
-});
+initialCards.forEach(function (card) {
+  addCard(card.name, card.link);
+})

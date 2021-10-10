@@ -43,10 +43,10 @@
           <button class="profile__add-button" type="button" aria-label="Добавить фотографию"></button>
         </section>
 
-        <!-- Gallery -->
+        <!-- Cards -->
 
-        <section class="gallery">
-          <ul class="gallery__list">
+        <section class="cards">
+          <ul class="cards__list">
 
           </ul>
         </section>
@@ -95,7 +95,7 @@
               <input class="form__item" type="text" name="card-name" value="" placeholder="Название" required>
               <input class="form__item" type="text" name="card-link" value="" placeholder="Ссылка на картинку" required>
             </fieldset>
-            <button class="form__save-button form__save-button_test" type="submit">Создать</button>
+            <button class="form__save-button" type="submit">Создать</button>
           </form>
 
         </div>
@@ -106,7 +106,7 @@
     <!-- Templates -->
 
     <template class="card-template">
-      <li class="gallery__item">
+      <li class="cards__item">
         <article class="card">
           <img class="card__image" src="" alt="">
           <div class="card__caption">

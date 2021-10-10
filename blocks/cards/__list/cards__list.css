@@ -1,4 +1,4 @@
-.gallery__list {
+.cards__list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
   gap: 20px 17px;
