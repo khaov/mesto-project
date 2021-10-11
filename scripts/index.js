@@ -2,8 +2,16 @@ const cardsList = document.querySelector('.cards__list');
 const cardTemplate = document.querySelector('.card-template').content;
 
 const cardFrom = document.querySelector('.form[name="card-form"]');
-const cardName = cardFrom.querySelector('.form__item[name="card-name"]');
-const cardLink = cardFrom.querySelector('.form__item[name="card-link"]');
+const cardNameInput = cardFrom.querySelector('.form__item[name="card-name"]');
+const cardLinkInput = cardFrom.querySelector('.form__item[name="card-link"]');
+
+const profile = document.querySelector('.profile');
+const profileName = profile.querySelector('.profile__name');
+const profileAbout = profile.querySelector('.profile__about');
+
+const profileFrom = document.querySelector('.form[name="profile-form"]');
+const profileNameInput = profileFrom.querySelector('.form__item[name="profile-name"]');
+const profileAboutInput = profileFrom.querySelector('.form__item[name="profile-about"]');
 
 function createCard(nameValue, linkValue) {
   const cardsItem = cardTemplate.cloneNode(true);
@@ -31,9 +39,17 @@ initialCards.forEach(function (card) {
 
 function addCard (evt) {
   evt.preventDefault();
-  createCard(cardName.value, cardLink.value);
+  createCard(cardNameInput.value, cardLinkInput.value);
   cardName.value = '';
   cardLink.value = '';
 }
 
 cardFrom.addEventListener('submit', addCard);
+
+function editProfile (evt) {
+  evt.preventDefault();
+  profileName.textContent = profileNameInput.value;
+  profileAbout.textContent = profileAboutInput.value
+}
+
+profileFrom.addEventListener('submit', editProfile);
