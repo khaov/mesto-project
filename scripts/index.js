@@ -1,7 +1,11 @@
 const cardsList = document.querySelector('.cards__list');
 const cardTemplate = document.querySelector('.card-template').content;
 
-function addCard(nameValue, linkValue) {
+const cardFrom = document.querySelector('.form[name="card-form"]');
+const cardName = cardFrom.querySelector('.form__item[name="card-name"]');
+const cardLink = cardFrom.querySelector('.form__item[name="card-link"]');
+
+function createCard(nameValue, linkValue) {
   const cardsItem = cardTemplate.cloneNode(true);
   const deleteButton = cardsItem.querySelector('.card__delete-button');
   const likeButton = cardsItem.querySelector('.card__like-button');
@@ -22,5 +26,14 @@ function addCard(nameValue, linkValue) {
 }
 
 initialCards.forEach(function (card) {
-  addCard(card.name, card.link);
+  createCard(card.name, card.link);
 })
+
+function addCard (evt) {
+  evt.preventDefault();
+  createCard(cardName.value, cardLink.value);
+  cardName.value = '';
+  cardLink.value = '';
+}
+
+cardFrom.addEventListener('submit', addCard);
