@@ -37,91 +37,17 @@
               <h1 class="profile__name">Жак-Ив Кусто</h1>
               <button class="profile__edit-button" type="button" aria-label="Редактировать профиль"></button>
             </div>
-            <p class="profile__description">Исследователь океана</p>
-
+            <p class="profile__about">Исследователь океана</p>
           </div>
           <button class="profile__add-button" type="button" aria-label="Добавить фотографию"></button>
         </section>
 
-        <!-- Gallery -->
+        <!-- Cards -->
 
-        <section class="gallery">
-          <ul class="gallery__list">
-
-            <!-- Gallery item -->
-
-            <li class="gallery__item">
-              <article class="card">
-                <img class="card__image" src="images/card-karachayevsk.jpg" alt="Фотография Карачаево-Черкесской Республики">
-                <div class="card__caption">
-                  <h2 class="card__name">Карачаевск</h2>
-                  <button class="card__like-button" type="button" aria-label="Отметить как понравившееся"></button>
-                </div>
-              </article>
-            </li>
-
-            <!-- Gallery item -->
-
-            <li class="gallery__item">
-              <article class="card">
-                <img class="card__image" src="images/card-elbrus.jpg" alt="Фотография горы Эльбрус">
-                <div class="card__caption">
-                  <h2 class="card__name">Гора Эльбрус</h2>
-                  <button class="card__like-button" type="button" aria-label="Отметить как понравившееся"></button>
-                </div>
-              </article>
-            </li>
-
-            <!-- Gallery item -->
-
-            <li class="gallery__item">
-              <article class="card">
-                <img class="card__image" src="images/card-dombay.jpg" alt="Фотография горной территории Домбая">
-                <div class="card__caption">
-                  <h2 class="card__name">Домбай</h2>
-                  <button class="card__like-button" type="button" aria-label="Отметить как понравившееся"></button>
-                </div>
-              </article>
-            </li>
-
-            <!-- Gallery item -->
-
-            <li class="gallery__item">
-              <article class="card">
-                <img class="card__image" src="images/card-elbrus.jpg" alt="Фотография горы Эльбрус">
-                <div class="card__caption">
-                  <h2 class="card__name">Гора Эльбрус</h2>
-                  <button class="card__like-button" type="button" aria-label="Отметить как понравившееся"></button>
-                </div>
-              </article>
-            </li>
-
-            <!-- Gallery item -->
-
-            <li class="gallery__item">
-              <article class="card">
-                <img class="card__image" src="images/card-dombay.jpg" alt="Фотография горной территории Домбая">
-                <div class="card__caption">
-                  <h2 class="card__name">Домбай</h2>
-                  <button class="card__like-button" type="button" aria-label="Отметить как понравившееся"></button>
-                </div>
-              </article>
-            </li>
-
-            <!-- Gallery item -->
-
-            <li class="gallery__item">
-              <article class="card">
-                <img class="card__image" src="images/card-karachayevsk.jpg" alt="Фотография Карачаево-Черкесской Республики">
-                <div class="card__caption">
-                  <h2 class="card__name">Карачаево-Черкессия</h2>
-                  <button class="card__like-button card__like-button_active" type="button" aria-label="Отметить как понравившееся"></button>
-                </div>
-              </article>
-            </li>
+        <section class="cards">
+          <ul class="cards__list">
 
           </ul>
-
         </section>
 
       </main>
@@ -136,19 +62,21 @@
 
       </footer>
 
-      <!-- Modal -->
+      <!-- Popups -->
 
-      <div class="popup">
+      <!-- Edit profile popup -->
+
+      <div class="popup popup_type_edit-profile">
         <div class="popup__container">
           <button class="popup__close-button" type="button" aria-label="Закрыть редактирование профиля"></button>
 
-          <!-- Form -->
+          <!-- Edit profile form -->
 
-          <form class="form" name="profile-form">
+          <form class="form form_type_edit-profile" name="profile-form">
             <h2 class="form__heading">Редактировать профиль</h2>
             <fieldset class="form__input-container">
-              <input class="form__item" type="text" name="profile-name" value="Жак-Ив Кусто" placeholder="Ваше имя" required>
-              <input class="form__item" type="text" name="profile-description" value="Исследователь океана" placeholder="Ваш род занятий">
+              <input class="form__item form__item_type_profile-name" type="text" name="profile-name" value="" placeholder="Имя" required>
+              <input class="form__item form__item_type_profile-about" type="text" name="profile-about" value="" placeholder="О себе">
             </fieldset>
             <button class="form__save-button" type="submit">Сохранить</button>
           </form>
@@ -156,6 +84,63 @@
         </div>
       </div>
 
+      <!-- Add card popup -->
+
+      <div class="popup popup_type_add-card">
+        <div class="popup__container">
+          <button class="popup__close-button" type="button" aria-label="Закрыть редактирование профиля"></button>
+
+          <!-- Add card form -->
+
+          <form class="form form_type_add-card" name="card-form">
+            <h2 class="form__heading">Новое место</h2>
+            <fieldset class="form__input-container">
+              <input class="form__item form__item_type_card-name" type="text" name="card-name" value="" placeholder="Название" required>
+              <input class="form__item form__item_type_card-link" type="text" name="card-link" value="" placeholder="Ссылка на картинку" required>
+            </fieldset>
+            <button class="form__save-button" type="submit">Создать</button>
+          </form>
+
+        </div>
+      </div>
+
+      <!-- View photo popup -->
+
+      <div class="popup popup_type_view-photo">
+        <div class="popup__photo-container">
+          <button class="popup__close-button" type="button" aria-label="Закрыть просмотрт фотографии"></button>
+
+          <!-- Popup photo -->
+
+          <figure class="popup__photo">
+            <img class="popup__photo-picture" src="" alt="">
+            <figcaption class="popup__photo-caption"></figcaption>
+          </figure>
+
+        </div>
+      </div>
+
     </div>
+
+    <!-- Templates -->
+
+    <template class="card-template">
+      <li class="cards__item">
+        <article class="card">
+          <button class="card__delete-button" type="button" aria-label="Удалить"></button>
+          <img class="card__image" src="" alt="">
+          <div class="card__caption">
+            <h2 class="card__name"></h2>
+            <button class="card__like-button" type="button" aria-label="Отметить как понравившееся"></button>
+          </div>
+        </article>
+      </li>
+    </template>
+
+    <!-- Scripts -->
+
+    <script src="scripts/cards.js" defer></script>
+    <script src="scripts/index.js" defer></script>
+
   </body>
 </html>
