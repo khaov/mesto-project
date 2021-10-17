@@ -6,9 +6,9 @@ const editProfileButton = profile.querySelector('.profile__edit-button');
 const editProfilePopup = document.querySelector('.popup_type_edit-profile');
 const editProfileClose = editProfilePopup.querySelector('.popup__close-button');
 
-const editProfileFrom = editProfilePopup.querySelector('.form_type_edit-profile');
-const profileNameInput = editProfileFrom.querySelector('.form__item_type_profile-name');
-const profileAboutInput = editProfileFrom.querySelector('.form__item_type_profile-about');
+const editProfileForm = editProfilePopup.querySelector('.form_type_edit-profile');
+const profileNameInput = editProfileForm.querySelector('.form__item_type_profile-name');
+const profileAboutInput = editProfileForm.querySelector('.form__item_type_profile-about');
 
 const cardsList = document.querySelector('.cards__list');
 const cardTemplate = document.querySelector('.card-template').content;
@@ -17,9 +17,9 @@ const addCardButton = profile.querySelector('.profile__add-button');
 const addCardPopup = document.querySelector('.popup_type_add-card');
 const addCardClose = addCardPopup.querySelector('.popup__close-button');
 
-const addCardFrom = addCardPopup.querySelector('.form_type_add-card');
-const cardNameInput = addCardFrom.querySelector('.form__item_type_card-name');
-const cardLinkInput = addCardFrom.querySelector('.form__item_type_card-link');
+const addCardForm = addCardPopup.querySelector('.form_type_add-card');
+const cardNameInput = addCardForm.querySelector('.form__item_type_card-name');
+const cardLinkInput = addCardForm.querySelector('.form__item_type_card-link');
 
 const viewPhotoPopup = document.querySelector('.popup_type_view-photo');
 const viewPhotoClose = viewPhotoPopup.querySelector('.popup__close-button');
@@ -39,7 +39,7 @@ function editProfile (evt) {
 }
 
 function createCard(nameValue, linkValue) {
-  const cardsItem = cardTemplate.cloneNode(true);
+  const cardsItem = cardTemplate.firstElementChild.cloneNode(true);
   const cardName = cardsItem.querySelector('.card__name');
   const cardImage = cardsItem.querySelector('.card__image');
   const deleteCardButton = cardsItem.querySelector('.card__delete-button');
@@ -48,44 +48,47 @@ function createCard(nameValue, linkValue) {
   cardName.textContent = nameValue;
   cardImage.src = linkValue;
   cardImage.alt = nameValue;
-  cardsList.prepend(cardsItem);
 
   cardImage.addEventListener('click', function () {
-    togglePopup(viewPhotoPopup);
     popupPhotoPicture.src = linkValue;
     popupPhotoPicture.alt = nameValue;
     popupPhotoCaption.textContent = nameValue;
+    togglePopup(viewPhotoPopup);
   });
 
   deleteCardButton.addEventListener('click', function () {
-    const currentItem = deleteCardButton.closest('.cards__item');
-    currentItem.remove();
+    cardsItem.remove();
   });
 
   likeCardButton.addEventListener('click', function (evt) {
     evt.target.classList.toggle('card__like-button_active');
   });
+
+  return cardsItem;
+}
+
+function renderCard(cardName, cardLink) {
+  cardsList.prepend(createCard(cardName, cardLink));
 }
 
 function addCard (evt) {
   evt.preventDefault();
-  createCard(cardNameInput.value, cardLinkInput.value);
-  cardNameInput.value = '';
-  cardLinkInput.value = '';
+  renderCard(cardNameInput.value, cardLinkInput.value);
+  addCardForm.reset();
   togglePopup(addCardPopup);
 }
 
 editProfileButton.addEventListener('click', function (){
-  togglePopup(editProfilePopup);
   profileNameInput.value = profileName.textContent;
   profileAboutInput.value = profileAbout.textContent
+  togglePopup(editProfilePopup);
 });
 
 editProfileClose.addEventListener('click', function (){
   togglePopup(editProfilePopup);
 });
 
-editProfileFrom.addEventListener('submit', editProfile);
+editProfileForm.addEventListener('submit', editProfile);
 
 addCardButton.addEventListener('click', function (){
   togglePopup(addCardPopup);
@@ -95,12 +98,12 @@ addCardClose.addEventListener('click', function (){
   togglePopup(addCardPopup);
 });
 
-addCardFrom.addEventListener('submit', addCard);
+addCardForm.addEventListener('submit', addCard);
 
 viewPhotoClose.addEventListener('click', function (){
   togglePopup(viewPhotoPopup);
 });
 
 initialCards.forEach(function (card) {
-  createCard(card.name, card.link);
+  renderCard(card.name, card.link);
 })
