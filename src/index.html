@@ -8,8 +8,7 @@
     <meta name="keywords" content="HTML, CSS">
     <meta name="author" content="Артём Хаов">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="pages/index.css">
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="<%=require('./images/favicon.ico')%>" type="image/x-icon">
   </head>
   <body>
     <div class="page">
@@ -31,7 +30,7 @@
         <!-- Profile -->
 
         <section class="profile">
-          <img class="profile__avatar" src="images/profile-avatar.jpg" alt="Фото профиля">
+          <img class="profile__avatar" src="<%=require('./images/profile-avatar.jpg')%>" alt="Фото профиля">
           <div class="profile__info">
             <div class="profile__heading">
               <h1 class="profile__name">Жак-Ив Кусто</h1>
