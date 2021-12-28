@@ -1,3 +1,5 @@
+import './index.css';
+
 const profile = document.querySelector('.profile');
 const profileName = profile.querySelector('.profile__name');
 const profileAbout = profile.querySelector('.profile__about');
@@ -110,7 +112,7 @@ initialCards.forEach(function (card) {
 
 
 
-// Const
+// Constants
 
 const formSettings = {
   formSelector: '.form',
@@ -184,5 +186,7 @@ const enableValidation = () => {
     setEventListeners(formElement);
   });
 };
+
+
 
 enableValidation(formSettings);
