@@ -6,6 +6,8 @@ import { renderCard } from './card.js';
 
 const popups = document.querySelectorAll('.popup');
 
+// Profile edit selectors
+
 const profile = document.querySelector('.profile');
 const profileName = profile.querySelector('.profile__name');
 const profileAbout = profile.querySelector('.profile__about');
@@ -17,12 +19,20 @@ const editProfileForm = editProfilePopup.querySelector('.form_type_edit-profile'
 const profileNameInput = editProfileForm.querySelector('.form__item_type_profile-name');
 const profileAboutInput = editProfileForm.querySelector('.form__item_type_profile-about');
 
+// Card add selectors
+
 const addCardButton = profile.querySelector('.profile__add-button');
 
 const addCardPopup = document.querySelector('.popup_type_add-card');
 const addCardForm = addCardPopup.querySelector('.form_type_add-card');
 const cardNameInput = addCardForm.querySelector('.form__item_type_card-name');
 const cardLinkInput = addCardForm.querySelector('.form__item_type_card-link');
+
+// Photo view selectors
+
+const viewPhotoPopup = document.querySelector('.popup_type_view-photo');
+const popupPhotoPicture = viewPhotoPopup.querySelector('.popup__photo-picture');
+const popupPhotoCaption = viewPhotoPopup.querySelector('.popup__photo-caption');
 
 // Close popup by ESC
 
@@ -82,3 +92,12 @@ export function addCard (evt) {
 }
 
 addCardForm.addEventListener('submit', addCard);
+
+// Photo view
+
+export function viewPhoto (link, name) {
+  popupPhotoPicture.src = link;
+  popupPhotoPicture.alt = name;
+  popupPhotoCaption.textContent = name;
+  openPopup(viewPhotoPopup);
+}

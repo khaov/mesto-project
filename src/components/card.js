@@ -1,13 +1,9 @@
-import { openPopup, closePopup } from './utils.js';
-
 import { initialCards } from './data.js';
+
+import { viewPhoto } from './modal.js';
 
 const cardsList = document.querySelector('.cards__list');
 const cardTemplate = document.querySelector('.card-template').content;
-
-const viewPhotoPopup = document.querySelector('.popup_type_view-photo');
-const popupPhotoPicture = viewPhotoPopup.querySelector('.popup__photo-picture');
-const popupPhotoCaption = viewPhotoPopup.querySelector('.popup__photo-caption');
 
 function createCard(nameValue, linkValue) {
   const cardsItem = cardTemplate.firstElementChild.cloneNode(true);
@@ -21,10 +17,7 @@ function createCard(nameValue, linkValue) {
   cardImage.alt = nameValue;
 
   cardImage.addEventListener('click', function () {
-    popupPhotoPicture.src = linkValue;
-    popupPhotoPicture.alt = nameValue;
-    popupPhotoCaption.textContent = nameValue;
-    openPopup(viewPhotoPopup);
+    viewPhoto(linkValue, nameValue);
   });
 
   deleteCardButton.addEventListener('click', function () {
