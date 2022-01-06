@@ -51,6 +51,8 @@ function closePopupByClick(evt) {
   }
 }
 
+// Close popup
+
 popups.forEach(function(popup) {
   popup.addEventListener('click', function (evt) {
     closePopupByClick(evt);
