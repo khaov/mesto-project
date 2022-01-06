@@ -3,7 +3,7 @@ import {
   togglePopup
 } from '../components/utils.js';
 
-import { initialCards } from './cards.js';
+import { initialCards } from './data.js';
 
 const cardsList = document.querySelector('.cards__list');
 const cardTemplate = document.querySelector('.card-template').content;
