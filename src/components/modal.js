@@ -1,8 +1,8 @@
-import {
-  togglePopup
-} from '../components/utils.js';
+import { ESC_KEYCODE } from './constants.js';
 
-import { renderCard } from '../components/card.js';
+import { openPopup, closePopup } from './utils.js';
+
+import { renderCard } from './card.js';
 
 const popups = document.querySelectorAll('.popup');
 
@@ -24,13 +24,20 @@ const addCardForm = addCardPopup.querySelector('.form_type_add-card');
 const cardNameInput = addCardForm.querySelector('.form__item_type_card-name');
 const cardLinkInput = addCardForm.querySelector('.form__item_type_card-link');
 
+// Close popup by ESC
 
+export function closePopupByEsc(evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+  }
+}
 
 // Close popup by click
 
 function closePopupByClick(evt) {
   if (evt.target === evt.currentTarget || evt.target.classList.contains('popup__close-button')) {
-    togglePopup(evt.currentTarget);
+    closePopup(evt.currentTarget);
   }
 }
 
@@ -46,7 +53,7 @@ export function enableEditProfile() {
   editProfileButton.addEventListener('click', function () {
     profileNameInput.value = profileName.textContent;
     profileAboutInput.value = profileAbout.textContent
-    togglePopup(editProfilePopup);
+    openPopup(editProfilePopup);
   });
 }
 
@@ -54,7 +61,7 @@ function editProfile (evt) {
   evt.preventDefault();
   profileName.textContent = profileNameInput.value;
   profileAbout.textContent = profileAboutInput.value;
-  togglePopup(editProfilePopup);
+  closePopup(editProfilePopup);
 }
 
 editProfileForm.addEventListener('submit', editProfile);
@@ -63,7 +70,7 @@ editProfileForm.addEventListener('submit', editProfile);
 
 export function enableAddCard() {
   addCardButton.addEventListener('click', function () {
-    togglePopup(addCardPopup);
+    openPopup(addCardPopup);
   });
 }
 
@@ -71,7 +78,7 @@ export function addCard (evt) {
   evt.preventDefault();
   renderCard(cardNameInput.value, cardLinkInput.value);
   addCardForm.reset();
-  togglePopup(addCardPopup);
+  closePopup(addCardPopup);
 }
 
 addCardForm.addEventListener('submit', addCard);

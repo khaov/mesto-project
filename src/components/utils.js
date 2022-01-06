@@ -1,19 +1,11 @@
+import { closePopupByEsc } from './modal.js';
 
-
-
-export const viewPhotoPopup = document.querySelector('.popup_type_view-photo');
-
-export function togglePopup(targetPopup) {
-  targetPopup.classList.toggle('popup_opened');
+export function openPopup (targetPopup) {
+  targetPopup.classList.add('popup_opened');
+  window.addEventListener('keydown', closePopupByEsc);
 }
 
-// Constants
-
-export const formSettings = {
-  formSelector: '.form',
-  inputSelector: '.form__item',
-  submitButtonSelector: '.form__save-button',
-  inactiveButtonClass: 'form__save-button_disabled',
-  inputErrorClass: 'form__item_type_error',
-  errorClass: 'form__error_visible'
-};
+export function closePopup (targetPopup) {
+  targetPopup.classList.remove('popup_opened');
+  window.removeEventListener('keydown', closePopupByEsc);
+}

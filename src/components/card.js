@@ -1,13 +1,11 @@
-import {
-  viewPhotoPopup,
-  togglePopup
-} from '../components/utils.js';
+import { openPopup, closePopup } from './utils.js';
 
 import { initialCards } from './data.js';
 
 const cardsList = document.querySelector('.cards__list');
 const cardTemplate = document.querySelector('.card-template').content;
 
+const viewPhotoPopup = document.querySelector('.popup_type_view-photo');
 const popupPhotoPicture = viewPhotoPopup.querySelector('.popup__photo-picture');
 const popupPhotoCaption = viewPhotoPopup.querySelector('.popup__photo-caption');
 
@@ -26,7 +24,7 @@ function createCard(nameValue, linkValue) {
     popupPhotoPicture.src = linkValue;
     popupPhotoPicture.alt = nameValue;
     popupPhotoCaption.textContent = nameValue;
-    togglePopup(viewPhotoPopup);
+    openPopup(viewPhotoPopup);
   });
 
   deleteCardButton.addEventListener('click', function () {
