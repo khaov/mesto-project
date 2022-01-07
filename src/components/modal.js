@@ -1,4 +1,4 @@
-import { ESC_KEYCODE } from './constants.js';
+import { ESC_KEYCODE, formSettings } from './constants.js';
 
 import { openPopup, closePopup } from './utils.js';
 
@@ -18,6 +18,7 @@ const editProfilePopup = document.querySelector('.popup_type_edit-profile');
 const editProfileForm = editProfilePopup.querySelector('.form_type_edit-profile');
 const profileNameInput = editProfileForm.querySelector('.form__item_type_profile-name');
 const profileAboutInput = editProfileForm.querySelector('.form__item_type_profile-about');
+const profileSaveButton = editProfileForm.querySelector('.form__save-button');
 
 // Card add selectors
 
@@ -27,6 +28,7 @@ const addCardPopup = document.querySelector('.popup_type_add-card');
 const addCardForm = addCardPopup.querySelector('.form_type_add-card');
 const cardNameInput = addCardForm.querySelector('.form__item_type_card-name');
 const cardLinkInput = addCardForm.querySelector('.form__item_type_card-link');
+const cardSaveButton = addCardForm.querySelector('.form__save-button');
 
 // Photo view selectors
 
@@ -54,9 +56,7 @@ function closePopupByClick(evt) {
 // Close popup
 
 popups.forEach(function(popup) {
-  popup.addEventListener('click', function (evt) {
-    closePopupByClick(evt);
-  });
+  popup.addEventListener('click', closePopupByClick);
 });
 
 // Profile edit
@@ -73,6 +73,8 @@ function editProfile (evt) {
   evt.preventDefault();
   profileName.textContent = profileNameInput.value;
   profileAbout.textContent = profileAboutInput.value;
+  profileSaveButton.classList.add(formSettings.inactiveButtonClass);
+  profileSaveButton.setAttribute("disabled", true);
   closePopup(editProfilePopup);
 }
 
@@ -90,6 +92,8 @@ export function addCard (evt) {
   evt.preventDefault();
   renderCard(cardNameInput.value, cardLinkInput.value);
   addCardForm.reset();
+  cardSaveButton.classList.add(formSettings.inactiveButtonClass);
+  cardSaveButton.setAttribute("disabled", true);
   closePopup(addCardPopup);
 }
 
