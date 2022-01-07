@@ -8,8 +8,7 @@
     <meta name="keywords" content="HTML, CSS">
     <meta name="author" content="Артём Хаов">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="pages/index.css">
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="<%=require('./images/favicon.ico')%>" type="image/x-icon">
   </head>
   <body>
     <div class="page">
@@ -20,7 +19,7 @@
 
         <!-- Logo -->
 
-        <img class="header__logo" src="images/header-logo.svg" alt="Логотип проекта «Mesto»">
+        <img class="header__logo" src="<%=require('./images/header-logo.svg')%>" alt="Логотип проекта «Mesto»">
 
       </header>
 
@@ -31,7 +30,7 @@
         <!-- Profile -->
 
         <section class="profile">
-          <img class="profile__avatar" src="images/profile-avatar.jpg" alt="Фото профиля">
+          <img class="profile__avatar" src="<%=require('./images/profile-avatar.jpg')%>" alt="Фото профиля">
           <div class="profile__info">
             <div class="profile__heading">
               <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -75,8 +74,14 @@
           <form class="form form_type_edit-profile" name="profile-form">
             <h2 class="form__heading">Редактировать профиль</h2>
             <fieldset class="form__input-container">
-              <input class="form__item form__item_type_profile-name" type="text" name="profile-name" value="" placeholder="Имя" required>
-              <input class="form__item form__item_type_profile-about" type="text" name="profile-about" value="" placeholder="О себе">
+              <label class="form__field">
+                <input id="profile-name" class="form__item form__item_type_profile-name" type="text" name="profile-name" value="" placeholder="Имя" minlength="2" maxlength="40" required>
+                <span class="form__error profile-name-error"></span>
+              </label>
+              <label class="form__field">
+                <input id="profile-about" class="form__item form__item_type_profile-about" type="text" name="profile-about" value="" placeholder="О себе" minlength="2" maxlength="200" required>
+                <span class="form__error profile-about-error"></span>
+              </label>
             </fieldset>
             <button class="form__save-button" type="submit">Сохранить</button>
           </form>
@@ -95,8 +100,14 @@
           <form class="form form_type_add-card" name="card-form">
             <h2 class="form__heading">Новое место</h2>
             <fieldset class="form__input-container">
-              <input class="form__item form__item_type_card-name" type="text" name="card-name" value="" placeholder="Название" required>
-              <input class="form__item form__item_type_card-link" type="text" name="card-link" value="" placeholder="Ссылка на картинку" required>
+              <label class="form__field">
+                <input id="card-name" class="form__item form__item_type_card-name" type="text" name="card-name" value="" placeholder="Название" minlength="2" maxlength="30" required>
+                <span class="form__error card-name-error"></span>
+              </label>
+              <label class="form__field">
+                <input id="card-link" class="form__item form__item_type_card-link" type="url" name="card-link" value="" placeholder="Ссылка на картинку" required>
+                <span class="form__error card-link-error"></span>
+              </label>
             </fieldset>
             <button class="form__save-button" type="submit">Создать</button>
           </form>
@@ -136,11 +147,6 @@
         </article>
       </li>
     </template>
-
-    <!-- Scripts -->
-
-    <script src="scripts/cards.js" defer></script>
-    <script src="scripts/index.js" defer></script>
 
   </body>
 </html>
