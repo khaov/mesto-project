@@ -2,6 +2,8 @@ import { ESC_KEYCODE, formSettings } from './constants.js';
 
 import { openPopup, closePopup } from './utils.js';
 
+import {updateProfile} from './api.js';
+
 import { renderCard } from './card.js';
 
 const popups = document.querySelectorAll('.popup');
@@ -9,8 +11,9 @@ const popups = document.querySelectorAll('.popup');
 // Profile edit selectors
 
 const profile = document.querySelector('.profile');
-const profileName = profile.querySelector('.profile__name');
-const profileAbout = profile.querySelector('.profile__about');
+export const profileAvatar = profile.querySelector('.profile__avatar');
+export const profileName = profile.querySelector('.profile__name');
+export const profileAbout = profile.querySelector('.profile__about');
 
 const editProfileButton = profile.querySelector('.profile__edit-button');
 
@@ -75,6 +78,8 @@ function editProfile (evt) {
   profileAbout.textContent = profileAboutInput.value;
   profileSaveButton.classList.add(formSettings.inactiveButtonClass);
   profileSaveButton.setAttribute("disabled", true);
+
+  updateProfile(profileNameInput.value, profileAboutInput.value)
   closePopup(editProfilePopup);
 }
 

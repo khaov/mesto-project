@@ -34,9 +34,3 @@ function createCard(nameValue, linkValue) {
 export function renderCard(cardName, cardLink) {
   cardsList.prepend(createCard(cardName, cardLink));
 }
-
-export function enableCards() {
-  initialCards.forEach(function (card) {
-    renderCard(card.name, card.link);
-  });
-}
