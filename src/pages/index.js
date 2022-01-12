@@ -25,7 +25,7 @@ getProfile()
 getCards()
   .then((cards) => {
     cards.forEach(function (card) {
-      renderCard(card.name, card.link);
+      renderCard(card.name, card.link, card.likes);
     });
   })
   .catch((err) => {

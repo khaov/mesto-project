@@ -5,22 +5,19 @@ import { viewPhoto } from './modal.js';
 const cardsList = document.querySelector('.cards__list');
 const cardTemplate = document.querySelector('.card-template').content;
 
-function createCard(nameValue, linkValue) {
+function createCard(nameValue, linkValue, likesValue) {
   const cardsItem = cardTemplate.firstElementChild.cloneNode(true);
   const cardName = cardsItem.querySelector('.card__name');
   const cardImage = cardsItem.querySelector('.card__image');
-
+  const cardLikes = cardsItem.querySelector('.card__likes');
 
   const deleteCardButton = cardsItem.querySelector('.card__delete-button');
   const likeCardButton = cardsItem.querySelector('.card__like-button');
 
-  const cardLikesCounter = cardsItem.querySelector('.card__likes-counter');
-
   cardName.textContent = nameValue;
   cardImage.src = linkValue;
   cardImage.alt = nameValue;
-
-  //cardLikesCounter.textContent = card.likes.length;
+  cardLikes.textContent = likesValue.length;
 
   cardImage.addEventListener('click', function () {
     viewPhoto(linkValue, nameValue);
@@ -37,6 +34,6 @@ function createCard(nameValue, linkValue) {
   return cardsItem;
 }
 
-export function renderCard(cardName, cardLink) {
-  cardsList.prepend(createCard(cardName, cardLink));
+export function renderCard(cardName, cardLink, cardLikes) {
+  cardsList.prepend(createCard(cardName, cardLink, cardLikes));
 }
