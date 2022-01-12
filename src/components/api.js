@@ -1,46 +1,57 @@
-import { profileAvatar, profileName, profileAbout } from './modal.js';
-import { renderCard } from './card.js';
+import { config } from './constants.js';
 
-export function enableProfile() {
-  return fetch('https://nomoreparties.co/v1/plus-cohort-5/users/me ', {
-    headers: {
-      authorization: 'd0ad5ddf-557e-4159-9ffa-f2758009f474',
-      'Content-Type': 'application/json'
-    }
-  })
-    .then(res => res.json())
-    .then((data) => {
-      profileAvatar.src = data.avatar;
-      profileName.textContent = data.name;
-      profileAbout.textContent = data.about;
-    });
+// Check response from API
+
+function checkResponse(res) {
+  if (res.ok) {
+    return res.json();
+  }
+
+  return Promise.reject(`Ошибка: ${res.status}`);
 }
 
-export function enableCards() {
-  return fetch('https://nomoreparties.co/v1/plus-cohort-5/cards ', {
-    headers: {
-      authorization: 'd0ad5ddf-557e-4159-9ffa-f2758009f474',
-      'Content-Type': 'application/json'
-    }
+// Get profile from API
+
+export const getProfile = () => {
+  return fetch(`${config.baseUrl}/users/me`, {
+    headers: config.headers
   })
-    .then(res => res.json())
-    .then((cards) => {
-      cards.forEach(function (card) {
-        renderCard(card.name, card.link);
-      });
-    });
+    .then(checkResponse)
 }
 
-export function updateProfile(name, about) {
-  fetch('https://nomoreparties.co/v1/plus-cohort-5/users/me', {
+// Get cards from API
+
+export const getCards = () => {
+  return fetch(`${config.baseUrl}/cards`, {
+    headers: config.headers
+  })
+  .then(checkResponse)
+}
+
+// Update profile
+
+export const updateProfile = (name, about) => {
+  return fetch(`${config.baseUrl}/users/me`, {
     method: 'PATCH',
-    headers: {
-      authorization: 'd0ad5ddf-557e-4159-9ffa-f2758009f474',
-      'Content-Type': 'application/json'
-    },
+    headers: config.headers,
     body: JSON.stringify({
       name: name,
       about: about
     })
-  });
+  })
+  .then(checkResponse)
+}
+
+// Post card
+
+export const postCard = (name, link) => {
+  return fetch(`${config.baseUrl}/cards`, {
+    method: 'POST',
+    headers: config.headers,
+    body: JSON.stringify({
+      name: name,
+      link: link
+    })
+  })
+  .then(checkResponse)
 }

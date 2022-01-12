@@ -9,12 +9,18 @@ function createCard(nameValue, linkValue) {
   const cardsItem = cardTemplate.firstElementChild.cloneNode(true);
   const cardName = cardsItem.querySelector('.card__name');
   const cardImage = cardsItem.querySelector('.card__image');
+
+
   const deleteCardButton = cardsItem.querySelector('.card__delete-button');
   const likeCardButton = cardsItem.querySelector('.card__like-button');
+
+  const cardLikesCounter = cardsItem.querySelector('.card__likes-counter');
 
   cardName.textContent = nameValue;
   cardImage.src = linkValue;
   cardImage.alt = nameValue;
+
+  //cardLikesCounter.textContent = card.likes.length;
 
   cardImage.addEventListener('click', function () {
     viewPhoto(linkValue, nameValue);

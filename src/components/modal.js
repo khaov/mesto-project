@@ -3,6 +3,7 @@ import { ESC_KEYCODE, formSettings } from './constants.js';
 import { openPopup, closePopup } from './utils.js';
 
 import {updateProfile} from './api.js';
+import { postCard } from './api.js';
 
 import { renderCard } from './card.js';
 
@@ -77,9 +78,10 @@ function editProfile (evt) {
   profileName.textContent = profileNameInput.value;
   profileAbout.textContent = profileAboutInput.value;
   profileSaveButton.classList.add(formSettings.inactiveButtonClass);
-  profileSaveButton.setAttribute("disabled", true);
 
   updateProfile(profileNameInput.value, profileAboutInput.value)
+
+  profileSaveButton.setAttribute("disabled", true);
   closePopup(editProfilePopup);
 }
 
@@ -96,6 +98,9 @@ export function enableAddCard() {
 export function addCard (evt) {
   evt.preventDefault();
   renderCard(cardNameInput.value, cardLinkInput.value);
+
+  postCard(cardNameInput.value, cardLinkInput.value);
+
   addCardForm.reset();
   cardSaveButton.classList.add(formSettings.inactiveButtonClass);
   cardSaveButton.setAttribute("disabled", true);
