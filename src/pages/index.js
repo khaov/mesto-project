@@ -12,8 +12,11 @@ import { renderCard } from '../components/card.js';
 
 import { profileAvatar, profileName, profileAbout } from '../components/modal.js';
 
+export let profileId
+
 getProfile()
   .then((profile) => {
+    profileId = profile._id;
     profileAvatar.src = profile.avatar;
     profileName.textContent = profile.name;
     profileAbout.textContent = profile.about;
@@ -25,7 +28,7 @@ getProfile()
 getCards()
   .then((cards) => {
     cards.forEach(function (card) {
-      renderCard(card.name, card.link, card.likes);
+      renderCard(card);
     });
   })
   .catch((err) => {

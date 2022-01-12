@@ -3,8 +3,8 @@ import { ESC_KEYCODE, formSettings } from './constants.js';
 import { openPopup, closePopup } from './utils.js';
 
 import {updateProfile} from './api.js';
-import { postCard } from './api.js';
 
+import { postCard } from './api.js';
 import { renderCard } from './card.js';
 
 const popups = document.querySelectorAll('.popup');
@@ -97,9 +97,14 @@ export function enableAddCard() {
 
 export function addCard (evt) {
   evt.preventDefault();
-  renderCard(cardNameInput.value, cardLinkInput.value);
 
-  postCard(cardNameInput.value, cardLinkInput.value);
+  postCard(cardNameInput.value, cardLinkInput.value)
+    .then((card) => {
+      renderCard(card);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
   addCardForm.reset();
   cardSaveButton.classList.add(formSettings.inactiveButtonClass);

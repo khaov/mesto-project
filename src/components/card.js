@@ -1,39 +1,82 @@
-import { initialCards } from './data.js';
-
 import { viewPhoto } from './modal.js';
+
+import { profileId } from '../pages/index.js';
+
+import { deleteCard, addLike, removeLike } from './api.js';
 
 const cardsList = document.querySelector('.cards__list');
 const cardTemplate = document.querySelector('.card-template').content;
 
-function createCard(nameValue, linkValue, likesValue) {
+function hasLike(card) {
+  return card.likes.some(obj => obj._id == profileId)
+}
+
+function createCard(card) {
   const cardsItem = cardTemplate.firstElementChild.cloneNode(true);
   const cardName = cardsItem.querySelector('.card__name');
   const cardImage = cardsItem.querySelector('.card__image');
   const cardLikes = cardsItem.querySelector('.card__likes');
-
-  const deleteCardButton = cardsItem.querySelector('.card__delete-button');
   const likeCardButton = cardsItem.querySelector('.card__like-button');
+  const deleteCardButton = cardsItem.querySelector('.card__delete-button');
 
-  cardName.textContent = nameValue;
-  cardImage.src = linkValue;
-  cardImage.alt = nameValue;
-  cardLikes.textContent = likesValue.length;
+  cardName.textContent = card.name;
+  cardImage.src = card.link;
+  cardImage.alt = card.name;
+  cardLikes.textContent = card.likes.length;
+
+  // Photo view
 
   cardImage.addEventListener('click', function () {
-    viewPhoto(linkValue, nameValue);
+    viewPhoto(card.link, card.name);
   });
 
-  deleteCardButton.addEventListener('click', function () {
-    cardsItem.remove();
-  });
+  // Card delete
+
+  if (card.owner._id !== profileId) {
+    deleteCardButton.remove();
+  } else {
+    deleteCardButton.addEventListener('click', function () {
+      deleteCard(card._id)
+        .then(() => {
+          cardsItem.remove();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
+  }
+
+  if (hasLike(card)) {
+    likeCardButton.classList.add('card__like-button_active');
+  }
 
   likeCardButton.addEventListener('click', function (evt) {
-    evt.target.classList.toggle('card__like-button_active');
+    if (hasLike(card)) {
+      removeLike(card._id)
+        .then((res) => {
+          cardLikes.textContent = res.likes.length;
+          evt.target.classList.toggle('card__like-button_active');
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      addLike(card._id)
+        .then((res) => {
+          cardLikes.textContent = res.likes.length;
+          evt.target.classList.toggle('card__like-button_active');
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   });
 
   return cardsItem;
 }
 
-export function renderCard(cardName, cardLink, cardLikes) {
-  cardsList.prepend(createCard(cardName, cardLink, cardLikes));
+export function renderCard(card) {
+  cardsList.prepend(createCard(card));
 }
+
+

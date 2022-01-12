@@ -25,7 +25,7 @@ export const getCards = () => {
   return fetch(`${config.baseUrl}/cards`, {
     headers: config.headers
   })
-  .then(checkResponse)
+    .then(checkResponse)
 }
 
 // Update profile
@@ -39,7 +39,7 @@ export const updateProfile = (name, about) => {
       about: about
     })
   })
-  .then(checkResponse)
+    .then(checkResponse)
 }
 
 // Post card
@@ -53,5 +53,32 @@ export const postCard = (name, link) => {
       link: link
     })
   })
-  .then(checkResponse)
+    .then(checkResponse)
+}
+
+// Delete card
+
+export const deleteCard = (id) => {
+  return fetch(`${config.baseUrl}/cards/${id}`, {
+    method: 'DELETE',
+    headers: config.headers
+  })
+    .then(checkResponse)
+}
+
+
+export const addLike = (id) => {
+  return fetch(`${config.baseUrl}/cards/likes/${id}`, {
+    method: 'PUT',
+    headers: config.headers
+  })
+    .then(checkResponse)
+}
+
+export const removeLike = (id) => {
+  return fetch(`${config.baseUrl}/cards/likes/${id}`, {
+    method: 'DELETE',
+    headers: config.headers
+  })
+    .then(checkResponse)
 }
