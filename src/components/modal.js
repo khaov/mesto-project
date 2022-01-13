@@ -1,16 +1,23 @@
 import { ESC_KEYCODE, formSettings } from './constants.js';
-
 import { openPopup, closePopup } from './utils.js';
 
-import { renderCard } from './card.js';
+import { saveAvatar, saveProfile, saveCard } from './api.js';
+import { profile, avatar, profileAvatar, profileName, profileAbout } from './profile.js';
+import { createCard, renderCard } from './card.js';
 
 const popups = document.querySelectorAll('.popup');
 
-// Profile edit selectors
+// Avatar edit selectors
 
-const profile = document.querySelector('.profile');
-const profileName = profile.querySelector('.profile__name');
-const profileAbout = profile.querySelector('.profile__about');
+const editAvatarButton = avatar.querySelector('.avatar__edit-button');
+
+const editAvatarPopup = document.querySelector('.popup_type_edit-avatar');
+const editAvatarForm = editAvatarPopup.querySelector('.form_type_edit-avatar');
+const avatarLinkInput = editAvatarForm.querySelector('.form__item_type_avatar-link');
+const avatarSaveButton = editAvatarForm.querySelector('.form__save-button');
+
+
+// Profile edit selectors
 
 const editProfileButton = profile.querySelector('.profile__edit-button');
 
@@ -59,23 +66,78 @@ popups.forEach(function(popup) {
   popup.addEventListener('click', closePopupByClick);
 });
 
+// Avatar edit
+
+export function enableEditAvatar() {
+  editAvatarButton.addEventListener('click', function () {
+    openPopup(editAvatarPopup);
+  });
+}
+
+function editAvatar (evt) {
+  evt.preventDefault();
+
+  const originalTitle = profileSaveButton.textContent;
+  const saveTitle = 'Сохранение...';
+  showState(true, avatarSaveButton, saveTitle);
+
+  // Avatar save
+
+  saveAvatar(avatarLinkInput.value)
+    .then((res) => {
+
+      profileAvatar.src = res.avatar;
+
+      editAvatarForm.reset();
+      avatarSaveButton.classList.add(formSettings.inactiveButtonClass);
+      avatarSaveButton.setAttribute("disabled", true);
+      closePopup(editAvatarPopup);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      showState(false, avatarSaveButton, originalTitle);
+    });
+}
+
+editAvatarForm.addEventListener('submit', editAvatar);
+
 // Profile edit
 
 export function enableEditProfile() {
   editProfileButton.addEventListener('click', function () {
     profileNameInput.value = profileName.textContent;
-    profileAboutInput.value = profileAbout.textContent
+    profileAboutInput.value = profileAbout.textContent;
     openPopup(editProfilePopup);
   });
 }
 
 function editProfile (evt) {
   evt.preventDefault();
-  profileName.textContent = profileNameInput.value;
-  profileAbout.textContent = profileAboutInput.value;
-  profileSaveButton.classList.add(formSettings.inactiveButtonClass);
-  profileSaveButton.setAttribute("disabled", true);
-  closePopup(editProfilePopup);
+
+  const originalTitle = profileSaveButton.textContent;
+  const saveTitle = 'Сохранение...';
+  showState(true, profileSaveButton, saveTitle);
+
+  // Profile save
+
+  saveProfile(profileNameInput.value, profileAboutInput.value)
+    .then((res) => {
+
+      profileName.textContent = res.name;
+      profileAbout.textContent = res.about;
+
+      profileSaveButton.classList.add(formSettings.inactiveButtonClass);
+      profileSaveButton.setAttribute("disabled", true);
+      closePopup(editProfilePopup);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      showState(false, profileSaveButton, originalTitle);
+    });
 }
 
 editProfileForm.addEventListener('submit', editProfile);
@@ -90,11 +152,27 @@ export function enableAddCard() {
 
 export function addCard (evt) {
   evt.preventDefault();
-  renderCard(cardNameInput.value, cardLinkInput.value);
-  addCardForm.reset();
-  cardSaveButton.classList.add(formSettings.inactiveButtonClass);
-  cardSaveButton.setAttribute("disabled", true);
-  closePopup(addCardPopup);
+
+  const originalTitle = profileSaveButton.textContent;
+  const saveTitle = 'Сохранение...';
+  showState(true, cardSaveButton, saveTitle);
+
+  // Card save
+
+  saveCard(cardNameInput.value, cardLinkInput.value)
+    .then((res) => {
+      renderCard(createCard(res));
+      addCardForm.reset();
+      cardSaveButton.classList.add(formSettings.inactiveButtonClass);
+      cardSaveButton.setAttribute("disabled", true);
+      closePopup(addCardPopup);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      showState(false, cardSaveButton, originalTitle);
+    });
 }
 
 addCardForm.addEventListener('submit', addCard);
@@ -106,4 +184,15 @@ export function viewPhoto (link, name) {
   popupPhotoPicture.alt = name;
   popupPhotoCaption.textContent = name;
   openPopup(viewPhotoPopup);
+}
+
+// Save button state
+
+function showState(state, button, title) {
+  button.textContent = title;
+  if (state) {
+    button.setAttribute('disabled', true);
+  } else {
+    button.removeAttribute('disabled');
+  }
 }
