@@ -1,8 +1,0 @@
-.card {
-  display: grid;
-  grid-template-rows: 282px auto;
-  overflow: hidden;
-  border-radius: 10px;
-  background-color: #fff;
-  position: relative;
-}

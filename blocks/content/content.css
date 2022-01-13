@@ -1,9 +1,0 @@
-.content {
-  grid-area: content;
-}
-
-@media screen and (max-width: 767px) {
-  .content {
-    padding: 0 19px;
-  }
-}

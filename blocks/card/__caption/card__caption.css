@@ -1,7 +1,0 @@
-.card__caption {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  column-gap: 20px;
-  align-items: center;
-  padding: 25px 20px;
-}
