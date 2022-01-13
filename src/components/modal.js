@@ -2,18 +2,10 @@ import { ESC_KEYCODE, formSettings } from './constants.js';
 import { openPopup, closePopup } from './utils.js';
 
 import { saveAvatar, saveProfile, saveCard } from './api.js';
+import { profile, avatar, profileAvatar, profileName, profileAbout } from './profile.js';
 import { createCard, renderCard } from './card.js';
 
 const popups = document.querySelectorAll('.popup');
-
-
-
-const profile = document.querySelector('.profile');
-export const avatar = profile.querySelector('.profile__avatar');
-export const profileAvatar = avatar.querySelector('.avatar__image');
-export const profileName = profile.querySelector('.profile__name');
-export const profileAbout = profile.querySelector('.profile__about');
-
 
 // Avatar edit selectors
 
@@ -116,7 +108,7 @@ editAvatarForm.addEventListener('submit', editAvatar);
 export function enableEditProfile() {
   editProfileButton.addEventListener('click', function () {
     profileNameInput.value = profileName.textContent;
-    profileAboutInput.value = profileAbout.textContent
+    profileAboutInput.value = profileAbout.textContent;
     openPopup(editProfilePopup);
   });
 }

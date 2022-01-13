@@ -1,14 +1,14 @@
-
-
-import { profileId } from '../pages/index.js';
+import { profileId } from './profile.js';
 
 import { getCards, deleteCard, addLike, removeLike } from './api.js';
 import { viewPhoto } from './modal.js';
 
-
-
 const cardsList = document.querySelector('.cards__list');
 const cardTemplate = document.querySelector('.card-template').content;
+
+function checkLike(card) {
+  return card.likes.some(like => like._id === profileId);
+}
 
 export function createCard(card) {
   const cardsItem = cardTemplate.firstElementChild.cloneNode(true);
@@ -100,8 +100,4 @@ export function enableCards() {
     .catch((err) => {
       console.log(err);
     });
-}
-
-function checkLike(card) {
-  return card.likes.some(like => like._id === profileId);
 }
