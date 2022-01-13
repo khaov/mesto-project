@@ -1,17 +1,16 @@
-import { viewPhoto } from './modal.js';
+
 
 import { profileId } from '../pages/index.js';
 
-import { deleteCard, addLike, removeLike } from './api.js';
+import { getCards, deleteCard, addLike, removeLike } from './api.js';
+import { viewPhoto } from './modal.js';
+
+
 
 const cardsList = document.querySelector('.cards__list');
 const cardTemplate = document.querySelector('.card-template').content;
 
-function hasLike(card) {
-  return card.likes.some(obj => obj._id == profileId)
-}
-
-function createCard(card) {
+export function createCard(card) {
   const cardsItem = cardTemplate.firstElementChild.cloneNode(true);
   const cardName = cardsItem.querySelector('.card__name');
   const cardImage = cardsItem.querySelector('.card__image');
@@ -46,12 +45,19 @@ function createCard(card) {
     });
   }
 
-  if (hasLike(card)) {
+  // Card likes
+
+  // Like check
+
+  if (checkLike(card)) {
     likeCardButton.classList.add('card__like-button_active');
   }
 
   likeCardButton.addEventListener('click', function (evt) {
-    if (hasLike(card)) {
+    if (checkLike(card)) {
+
+      // Like remove
+
       removeLike(card._id)
         .then((res) => {
           cardLikes.textContent = res.likes.length;
@@ -60,7 +66,11 @@ function createCard(card) {
         .catch((err) => {
           console.log(err);
         });
+
     } else {
+
+      // Like add
+
       addLike(card._id)
         .then((res) => {
           cardLikes.textContent = res.likes.length;
@@ -69,6 +79,7 @@ function createCard(card) {
         .catch((err) => {
           console.log(err);
         });
+
     }
   });
 
@@ -76,7 +87,21 @@ function createCard(card) {
 }
 
 export function renderCard(card) {
-  cardsList.prepend(createCard(card));
+  cardsList.prepend(card);
 }
 
+export function enableCards() {
+  getCards()
+    .then((res) => {
+      res.reverse().forEach((card) => {
+        renderCard(createCard(card));
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
 
+function checkLike(card) {
+  return card.likes.some(like => like._id === profileId);
+}

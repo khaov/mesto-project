@@ -1,18 +1,22 @@
 import './index.css';
 
-import { getProfile, getCards } from '../components/api.js';
+import { getProfile } from '../components/api.js';
 
 
-import { enableEditProfile, enableAddCard} from '../components/modal.js';
+import { enableCards } from '../components/card.js';
+import { enableEditAvatar, enableEditProfile, enableAddCard} from '../components/modal.js';
 
 import { formSettings } from '../components/constants.js';
 import { enableValidation} from '../components/validate.js';
 
-import { renderCard } from '../components/card.js';
+
+
+
 
 import { profileAvatar, profileName, profileAbout } from '../components/modal.js';
 
 export let profileId
+
 
 getProfile()
   .then((profile) => {
@@ -25,18 +29,9 @@ getProfile()
     console.log(err);
   });
 
-getCards()
-  .then((cards) => {
-    cards.forEach(function (card) {
-      renderCard(card);
-    });
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+enableCards();
 
-
-
+enableEditAvatar();
 enableEditProfile();
 enableAddCard();
 

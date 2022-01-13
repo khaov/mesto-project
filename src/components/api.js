@@ -19,18 +19,22 @@ export const getProfile = () => {
     .then(checkResponse)
 }
 
-// Get cards from API
+// Avatar save
 
-export const getCards = () => {
-  return fetch(`${config.baseUrl}/cards`, {
-    headers: config.headers
+export const saveAvatar = (link) => {
+  return fetch(`${config.baseUrl}/users/me/avatar`, {
+    method: 'PATCH',
+    headers: config.headers,
+    body: JSON.stringify({
+      avatar: link
+    })
   })
     .then(checkResponse)
 }
 
-// Update profile
+// Profile save
 
-export const updateProfile = (name, about) => {
+export const saveProfile = (name, about) => {
   return fetch(`${config.baseUrl}/users/me`, {
     method: 'PATCH',
     headers: config.headers,
@@ -42,9 +46,18 @@ export const updateProfile = (name, about) => {
     .then(checkResponse)
 }
 
-// Post card
+// Get cards from API
 
-export const postCard = (name, link) => {
+export const getCards = () => {
+  return fetch(`${config.baseUrl}/cards`, {
+    headers: config.headers
+  })
+    .then(checkResponse)
+}
+
+// Card save
+
+export const saveCard = (name, link) => {
   return fetch(`${config.baseUrl}/cards`, {
     method: 'POST',
     headers: config.headers,
@@ -56,7 +69,7 @@ export const postCard = (name, link) => {
     .then(checkResponse)
 }
 
-// Delete card
+// Card delete
 
 export const deleteCard = (id) => {
   return fetch(`${config.baseUrl}/cards/${id}`, {
@@ -66,6 +79,7 @@ export const deleteCard = (id) => {
     .then(checkResponse)
 }
 
+// Card like add
 
 export const addLike = (id) => {
   return fetch(`${config.baseUrl}/cards/likes/${id}`, {
@@ -74,6 +88,8 @@ export const addLike = (id) => {
   })
     .then(checkResponse)
 }
+
+// Card like remove
 
 export const removeLike = (id) => {
   return fetch(`${config.baseUrl}/cards/likes/${id}`, {
