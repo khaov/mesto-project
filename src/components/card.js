@@ -1,6 +1,6 @@
-import { profileId } from './profile.js';
+import { profileId } from '../pages/index.js';
 
-import { getCards, deleteCard, addLike, removeLike } from './api.js';
+import { deleteCard, addLike, removeLike } from './api.js';
 import { viewPhoto } from './modal.js';
 
 const cardsList = document.querySelector('.cards__list');
@@ -88,16 +88,4 @@ export function createCard(card) {
 
 export function renderCard(card) {
   cardsList.prepend(card);
-}
-
-export function enableCards() {
-  getCards()
-    .then((res) => {
-      res.reverse().forEach((card) => {
-        renderCard(createCard(card));
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
 }

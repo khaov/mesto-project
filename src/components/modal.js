@@ -1,8 +1,8 @@
-import { ESC_KEYCODE, formSettings } from './constants.js';
+import { ESC_KEYCODE, profile, avatar, profileAvatar, profileName, profileAbout, formSettings } from './constants.js';
+
 import { openPopup, closePopup } from './utils.js';
 
 import { saveAvatar, saveProfile, saveCard } from './api.js';
-import { profile, avatar, profileAvatar, profileName, profileAbout } from './profile.js';
 import { createCard, renderCard } from './card.js';
 
 const popups = document.querySelectorAll('.popup');
