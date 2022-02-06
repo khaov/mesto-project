@@ -1,4 +1,4 @@
-import { profileId } from '../pages/index.js';
+import { profileId, apiMethods } from '../pages/index.js';
 
 import { deleteCard, addLike, removeLike } from './api.js';
 import { viewPhoto } from './modal.js';
@@ -35,7 +35,7 @@ export function createCard(card) {
     deleteCardButton.remove();
   } else {
     deleteCardButton.addEventListener('click', function () {
-      deleteCard(card._id)
+      apiMethods.deleteCard(card._id)
         .then(() => {
           cardsItem.remove();
         })
@@ -54,11 +54,11 @@ export function createCard(card) {
   }
 
   likeCardButton.addEventListener('click', function (evt) {
-    if (checkLike(card)) {
+    if (checkLike(card)) { // условие поменять на  !evt.target.classList.contains("places__btn-like_active")
 
       // Like remove
 
-      removeLike(card._id)
+      apiMethods.removeLike(card._id)
         .then((res) => {
           cardLikes.textContent = res.likes.length;
           evt.target.classList.toggle('card__like-button_active');
@@ -71,7 +71,7 @@ export function createCard(card) {
 
       // Like add
 
-      addLike(card._id)
+      apiMethods.addLike(card._id)
         .then((res) => {
           cardLikes.textContent = res.likes.length;
           evt.target.classList.toggle('card__like-button_active');

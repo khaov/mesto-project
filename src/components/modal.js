@@ -5,6 +5,8 @@ import { openPopup, closePopup } from './utils.js';
 import { saveAvatar, saveProfile, saveCard } from './api.js';
 import { createCard, renderCard } from './card.js';
 
+import { apiMethods } from '../pages/index.js';
+
 const popups = document.querySelectorAll('.popup');
 
 // Avatar edit selectors
@@ -83,7 +85,7 @@ function editAvatar (evt) {
 
   // Avatar save
 
-  saveAvatar(avatarLinkInput.value)
+  apiMethods.saveAvatar(avatarLinkInput.value)
     .then((res) => {
 
       profileAvatar.src = res.avatar;
@@ -122,7 +124,7 @@ function editProfile (evt) {
 
   // Profile save
 
-  saveProfile(profileNameInput.value, profileAboutInput.value)
+  apiMethods.saveProfile(profileNameInput.value, profileAboutInput.value)
     .then((res) => {
 
       profileName.textContent = res.name;
@@ -159,7 +161,7 @@ export function addCard (evt) {
 
   // Card save
 
-  saveCard(cardNameInput.value, cardLinkInput.value)
+  apiMethods.saveCard(cardNameInput.value, cardLinkInput.value)
     .then((res) => {
       renderCard(createCard(res));
       addCardForm.reset();
