@@ -1,8 +1,7 @@
-import { ESC_KEYCODE, profile, avatar, profileAvatar, profileName, profileAbout, formSettings } from './constants.js';
+import { ESC_KEYCODE, profile, avatar, profileAvatar, profileName, profileAbout, formSettings } from '../utils/constants.js';
 
-import { openPopup, closePopup } from './utils.js';
+import { openPopup, closePopup } from '../utils/utils.js';
 
-import { saveAvatar, saveProfile, saveCard } from './api.js';
 import { createCard, renderCard } from './card.js';
 
 import { apiMethods } from '../pages/index.js';

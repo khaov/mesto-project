@@ -1,14 +1,14 @@
 import './index.css';
 
-import { profileAvatar, profileName, profileAbout, formSettings, config } from '../components/constants.js';
+import { profileAvatar, profileName, profileAbout, formSettings, config } from '../utils/constants.js';
 
-import { getProfile, getCards } from '../components/api.js';
 import { createCard, renderCard} from '../components/card.js';
 import { enableEditAvatar, enableEditProfile, enableAddCard} from '../components/modal.js';
 
-import { enableValidation} from '../components/validate.js';
+import { enableValidation } from '../components/FormValidator.js';
 
 import Api from '../components/api.js';
+import FormValidator from '../components/FormValidator.js'
 
 export let profileId;
 
@@ -16,8 +16,6 @@ export const apiMethods = new Api({
   baseUrl: config.baseUrl,
   headers: config.headers
 })
-
-console.log(apiMethods)
 
 Promise.all([apiMethods.getProfile(), apiMethods.getCards()])
   .then(([profile, cards]) => {
@@ -39,5 +37,7 @@ enableEditAvatar();
 enableEditProfile();
 enableAddCard();
 
-enableValidation(formSettings);
-
+document.querySelectorAll(formSettings.formSelector).forEach((formElement) => {
+  const formValidator = new FormValidator(formElement, formSettings)
+  formValidator.enableValidation();
+});

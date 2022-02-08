@@ -1,6 +1,5 @@
 import { profileId, apiMethods } from '../pages/index.js';
 
-import { deleteCard, addLike, removeLike } from './api.js';
 import { viewPhoto } from './modal.js';
 
 const cardsList = document.querySelector('.cards__list');
