@@ -5,7 +5,7 @@
 export const config = {
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort-5',
   headers: {
-    authorization: 'd0ad5ddf-557e-4159-9ffa-f2758009f474',
+    authorization: '20520870-6cab-4f4f-bbfa-ddd25c12eab2',
     'Content-Type': 'application/json'
   }
 }

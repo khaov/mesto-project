@@ -1,4 +1,4 @@
-import { closePopupByEsc } from './modal.js';
+import { closePopupByEsc } from '../components/modal.js';
 
 export function openPopup (targetPopup) {
   targetPopup.classList.add('popup_opened');
