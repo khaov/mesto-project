@@ -1,4 +1,4 @@
-import { profileId, apiMethods } from '../pages/index.js';
+import { profileId, api } from '../pages/index.js';
 
 import { viewPhoto } from './modal.js';
 
@@ -34,7 +34,7 @@ export function createCard(card) {
     deleteCardButton.remove();
   } else {
     deleteCardButton.addEventListener('click', function () {
-      apiMethods.deleteCard(card._id)
+      api.deleteCard(card._id)
         .then(() => {
           cardsItem.remove();
         })
@@ -57,7 +57,7 @@ export function createCard(card) {
 
       // Like remove
 
-      apiMethods.removeLike(card._id)
+      api.removeLike(card._id)
         .then((res) => {
           cardLikes.textContent = res.likes.length;
           evt.target.classList.toggle('card__like-button_active');
@@ -70,7 +70,7 @@ export function createCard(card) {
 
       // Like add
 
-      apiMethods.addLike(card._id)
+      api.addLike(card._id)
         .then((res) => {
           cardLikes.textContent = res.likes.length;
           evt.target.classList.toggle('card__like-button_active');
