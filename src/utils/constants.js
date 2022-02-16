@@ -1,7 +1,6 @@
 // Constants
 
 // API config
-
 export const config = {
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort-5',
   headers: {
@@ -11,25 +10,17 @@ export const config = {
 }
 
 // KeyCodes
-
 export const ESC_KEYCODE = 27;
 
 // Profile
-
 export const selectors = {
   profileAvatar:  '.avatar__image',
   profileName:    '.profile__name',
   profileAbout:   '.profile__about',
 
   cardList:      '.cards__list',
-  cardTemplate:   '.card-template'
+  cardTemplate:  '.card-template'
 }
-
-export const profile = document.querySelector('.profile');
-export const avatar = profile.querySelector('.profile__avatar');
-export const profileAvatar = avatar.querySelector('.avatar__image');
-export const profileName = profile.querySelector('.profile__name');
-export const profileAbout = profile.querySelector('.profile__about');
 
 // Form
 
@@ -41,3 +32,13 @@ export const formSettings = {
   inputErrorClass: 'form__item_type_error',
   errorClass: 'form__error_visible'
 };
+
+
+
+
+export const profile = document.querySelector('.profile');
+export const avatar = profile.querySelector('.profile__avatar');
+export const profileAvatar = avatar.querySelector('.avatar__image');
+export const profileName = profile.querySelector('.profile__name');
+export const profileAbout = profile.querySelector('.profile__about');
+
