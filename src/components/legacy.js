@@ -9,12 +9,10 @@
 
 // export function createCard(card) {
 
-//   const likeCardButton = cardsItem.querySelector('.card__like-button');
-//   const deleteCardButton = cardsItem.querySelector('.card__delete-button');
 
-//   cardName.textContent = card.name;
-//   cardImage.src = card.link;
-//   cardImage.alt = card.name;
+
+
+
 //   cardLikes.textContent = card.likes.length;
 
 //   // Photo view
