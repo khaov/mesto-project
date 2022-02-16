@@ -1,90 +1,29 @@
-import { profileId, api } from '../pages/index.js';
+export default class Card {
+  constructor({ data }, cardTemplate) {
+    this._name = data.name;
+    this._link = data.link;
 
-import { viewPhoto } from './modal.js';
-
-const cardsList = document.querySelector('.cards__list');
-const cardTemplate = document.querySelector('.card-template').content;
-
-function checkLike(card) {
-  return card.likes.some(like => like._id === profileId);
-}
-
-export function createCard(card) {
-  const cardsItem = cardTemplate.firstElementChild.cloneNode(true);
-  const cardName = cardsItem.querySelector('.card__name');
-  const cardImage = cardsItem.querySelector('.card__image');
-  const cardLikes = cardsItem.querySelector('.card__likes');
-  const likeCardButton = cardsItem.querySelector('.card__like-button');
-  const deleteCardButton = cardsItem.querySelector('.card__delete-button');
-
-  cardName.textContent = card.name;
-  cardImage.src = card.link;
-  cardImage.alt = card.name;
-  cardLikes.textContent = card.likes.length;
-
-  // Photo view
-
-  cardImage.addEventListener('click', function () {
-    viewPhoto(card.link, card.name);
-  });
-
-  // Card delete
-
-  if (card.owner._id !== profileId) {
-    deleteCardButton.remove();
-  } else {
-    deleteCardButton.addEventListener('click', function () {
-      api.deleteCard(card._id)
-        .then(() => {
-          cardsItem.remove();
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    });
+    this._cardTemplate = cardTemplate;
   }
 
-  // Card likes
-
-  // Like check
-
-  if (checkLike(card)) {
-    likeCardButton.classList.add('card__like-button_active');
+  _getTemplate() {
+    return document
+      .querySelector(this._cardTemplate)
+      .content
+      .querySelector('.card')
+      .cloneNode(true);
   }
 
-  likeCardButton.addEventListener('click', function (evt) {
-    if (checkLike(card)) { // условие поменять на  !evt.target.classList.contains("places__btn-like_active")
+  createCard() {
+    this._cardsItem = this._getTemplate();
+    this._cardName = this._getTemplate.querySelector('.card__name');
+    this._cardImage = this._getTemplate.querySelector('.card__image');
 
-      // Like remove
+    this._cardName.textContent = this.name;
+    this._cardImage.src = this.link;
+    this._cardImage.alt = this.name;
 
-      api.removeLike(card._id)
-        .then((res) => {
-          cardLikes.textContent = res.likes.length;
-          evt.target.classList.toggle('card__like-button_active');
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    return _cardsItem;
+  }
 
-    } else {
-
-      // Like add
-
-      api.addLike(card._id)
-        .then((res) => {
-          cardLikes.textContent = res.likes.length;
-          evt.target.classList.toggle('card__like-button_active');
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-
-    }
-  });
-
-  return cardsItem;
-}
-
-export function renderCard(card) {
-  cardsList.prepend(card);
 }

@@ -16,6 +16,12 @@ export const ESC_KEYCODE = 27;
 
 // Profile
 
+export const selectors = {
+  profileAvatar:  '.avatar__image',
+  profileName:    '.profile__name',
+  profileAbout:   '.profile__about'
+}
+
 export const profile = document.querySelector('.profile');
 export const avatar = profile.querySelector('.profile__avatar');
 export const profileAvatar = avatar.querySelector('.avatar__image');

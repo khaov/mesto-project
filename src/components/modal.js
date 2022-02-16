@@ -2,7 +2,7 @@ import { ESC_KEYCODE, profile, avatar, profileAvatar, profileName, profileAbout,
 
 import { openPopup, closePopup } from '../utils/utils.js';
 
-import { createCard, renderCard } from './card.js';
+//import { createCard, renderCard } from './card.js';
 
 import { api } from '../pages/index.js';
 
