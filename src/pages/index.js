@@ -10,15 +10,20 @@ import Card from "../components/Card.js";
 
 const profileInfo = new UserInfo(selectors.profileAvatar, selectors.profileName,  selectors.profileAbout);
 
+function generateCard(cards) {
+  const card = new Card({
+    data: {...cards},
+  }, selectors.cardTemplate)
 
+  return card.createCard();
+}
 
+const cardsList = new Section({
+  renderer: (item) => {
+    cardsList.addItem(generateCard(item));
+  }
+}, selectors.cardList);
 
-
-
-
-// const CardList = new Section({
-//   data: items
-// }, ".card__list");
 
 
 
@@ -27,8 +32,6 @@ const profileInfo = new UserInfo(selectors.profileAvatar, selectors.profileName,
 
 
 import { enableEditAvatar, enableEditProfile, enableAddCard} from '../components/modal.js';
-
-
 
 export let profileId;
 
@@ -43,6 +46,17 @@ document.querySelectorAll(formSettings.formSelector).forEach((formElement) => {
   formValidator.enableValidation();
 });
 
+
+
+
+
+
+
+
+
+
+
+
 Promise.all([api.getProfile(), api.getCards()])
   .then(([profile, cards]) => {
 
@@ -53,6 +67,8 @@ Promise.all([api.getProfile(), api.getCards()])
       name: profile.name,
       about: profile.about,
     })
-    
+
+    cardsList.renderItems(cards.reverse());
+
   })
   .catch((err) => {console.log(err);});

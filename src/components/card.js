@@ -7,23 +7,26 @@ export default class Card {
   }
 
   _getTemplate() {
-    return document
+    const cardsItem = document
       .querySelector(this._cardTemplate)
       .content
-      .querySelector('.card')
+      .querySelector('.cards__item')
       .cloneNode(true);
+
+    return cardsItem;
   }
 
   createCard() {
-    this._cardsItem = this._getTemplate();
-    this._cardName = this._getTemplate.querySelector('.card__name');
-    this._cardImage = this._getTemplate.querySelector('.card__image');
+    this._card = this._getTemplate();
 
-    this._cardName.textContent = this.name;
-    this._cardImage.src = this.link;
-    this._cardImage.alt = this.name;
+    this._cardName = this._card.querySelector('.card__name');
+    this._cardImage = this._card.querySelector('.card__image');
 
-    return _cardsItem;
+    this._cardName.textContent = this._name;
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._name;
+
+    return this._card;
   }
 
 }

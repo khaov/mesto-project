@@ -1,94 +1,85 @@
-import { profileId, api } from '../pages/index.js';
+// import { profileId, api } from '../pages/index.js';
 
-import { viewPhoto } from './modal.js';
+// import { viewPhoto } from './modal.js';
 
-const cardsList = document.querySelector('.cards__list');
-const cardTemplate = document.querySelector('.card-template').content;
-
-function checkLike(card) {
-  return card.likes.some(like => like._id === profileId);
-}
-
-export function createCard(card) {
+// function checkLike(card) {
+//   return card.likes.some(like => like._id === profileId);
+// }
 
 
-  const cardsItem = cardTemplate.firstElementChild.cloneNode(true);
-  const cardName = cardsItem.querySelector('.card__name');
-  const cardImage = cardsItem.querySelector('.card__image');
-  const cardLikes = cardsItem.querySelector('.card__likes');
+// export function createCard(card) {
 
+//   const likeCardButton = cardsItem.querySelector('.card__like-button');
+//   const deleteCardButton = cardsItem.querySelector('.card__delete-button');
 
-  const likeCardButton = cardsItem.querySelector('.card__like-button');
-  const deleteCardButton = cardsItem.querySelector('.card__delete-button');
+//   cardName.textContent = card.name;
+//   cardImage.src = card.link;
+//   cardImage.alt = card.name;
+//   cardLikes.textContent = card.likes.length;
 
-  cardName.textContent = card.name;
-  cardImage.src = card.link;
-  cardImage.alt = card.name;
-  cardLikes.textContent = card.likes.length;
+//   // Photo view
 
-  // Photo view
+//   cardImage.addEventListener('click', function () {
+//     viewPhoto(card.link, card.name);
+//   });
 
-  cardImage.addEventListener('click', function () {
-    viewPhoto(card.link, card.name);
-  });
+//   // Card delete
 
-  // Card delete
+//   if (card.owner._id !== profileId) {
+//     deleteCardButton.remove();
+//   } else {
+//     deleteCardButton.addEventListener('click', function () {
+//       api.deleteCard(card._id)
+//         .then(() => {
+//           cardsItem.remove();
+//         })
+//         .catch((err) => {
+//           console.log(err);
+//         });
+//     });
+//   }
 
-  if (card.owner._id !== profileId) {
-    deleteCardButton.remove();
-  } else {
-    deleteCardButton.addEventListener('click', function () {
-      api.deleteCard(card._id)
-        .then(() => {
-          cardsItem.remove();
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    });
-  }
+//   // Card likes
 
-  // Card likes
+//   // Like check
 
-  // Like check
+//   if (checkLike(card)) {
+//     likeCardButton.classList.add('card__like-button_active');
+//   }
 
-  if (checkLike(card)) {
-    likeCardButton.classList.add('card__like-button_active');
-  }
+//   likeCardButton.addEventListener('click', function (evt) {
+//     if (checkLike(card)) { // условие поменять на  !evt.target.classList.contains("places__btn-like_active")
 
-  likeCardButton.addEventListener('click', function (evt) {
-    if (checkLike(card)) { // условие поменять на  !evt.target.classList.contains("places__btn-like_active")
+//       // Like remove
 
-      // Like remove
+//       api.removeLike(card._id)
+//         .then((res) => {
+//           cardLikes.textContent = res.likes.length;
+//           evt.target.classList.toggle('card__like-button_active');
+//         })
+//         .catch((err) => {
+//           console.log(err);
+//         });
 
-      api.removeLike(card._id)
-        .then((res) => {
-          cardLikes.textContent = res.likes.length;
-          evt.target.classList.toggle('card__like-button_active');
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+//     } else {
 
-    } else {
+//       // Like add
 
-      // Like add
+//       api.addLike(card._id)
+//         .then((res) => {
+//           cardLikes.textContent = res.likes.length;
+//           evt.target.classList.toggle('card__like-button_active');
+//         })
+//         .catch((err) => {
+//           console.log(err);
+//         });
 
-      api.addLike(card._id)
-        .then((res) => {
-          cardLikes.textContent = res.likes.length;
-          evt.target.classList.toggle('card__like-button_active');
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+//     }
+//   });
 
-    }
-  });
+//   return cardsItem;
+// }
 
-  return cardsItem;
-}
-
-export function renderCard(card) {
-  cardsList.prepend(card);
-}
+// export function renderCard(card) {
+//   cardsList.prepend(card);
+// }
