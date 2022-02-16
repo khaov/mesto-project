@@ -4,7 +4,7 @@ import { openPopup, closePopup } from '../utils/utils.js';
 
 import { createCard, renderCard } from './card.js';
 
-import { apiMethods } from '../pages/index.js';
+import { api } from '../pages/index.js';
 
 const popups = document.querySelectorAll('.popup');
 
@@ -84,7 +84,7 @@ function editAvatar (evt) {
 
   // Avatar save
 
-  apiMethods.saveAvatar(avatarLinkInput.value)
+  api.saveAvatar(avatarLinkInput.value)
     .then((res) => {
 
       profileAvatar.src = res.avatar;
@@ -123,7 +123,7 @@ function editProfile (evt) {
 
   // Profile save
 
-  apiMethods.saveProfile(profileNameInput.value, profileAboutInput.value)
+  api.saveProfile(profileNameInput.value, profileAboutInput.value)
     .then((res) => {
 
       profileName.textContent = res.name;
@@ -160,7 +160,7 @@ export function addCard (evt) {
 
   // Card save
 
-  apiMethods.saveCard(cardNameInput.value, cardLinkInput.value)
+  api.saveCard(cardNameInput.value, cardLinkInput.value)
     .then((res) => {
       renderCard(createCard(res));
       addCardForm.reset();

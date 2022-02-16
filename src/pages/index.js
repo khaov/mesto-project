@@ -5,19 +5,14 @@ import { profileAvatar, profileName, profileAbout, formSettings, config } from '
 import { createCard, renderCard} from '../components/card.js';
 import { enableEditAvatar, enableEditProfile, enableAddCard} from '../components/modal.js';
 
-import { enableValidation } from '../components/FormValidator.js';
-
-import Api from '../components/api.js';
+import Api from '../components/Api.js'; // все обращения к api будут в индекс файле (пока для удоства, сделал чтобы работало через импорт в другие файлы)
 import FormValidator from '../components/FormValidator.js'
 
 export let profileId;
 
-export const apiMethods = new Api({
-  baseUrl: config.baseUrl,
-  headers: config.headers
-})
+export const api = new Api(config)
 
-Promise.all([apiMethods.getProfile(), apiMethods.getCards()])
+Promise.all([api.getProfile(), api.getCards()])
   .then(([profile, cards]) => {
     profileId = profile._id;
     profileAvatar.src = profile.avatar;
@@ -31,7 +26,7 @@ Promise.all([apiMethods.getProfile(), apiMethods.getCards()])
   })
   .catch((err) => {
     console.log(err);
-  });
+});
 
 enableEditAvatar();
 enableEditProfile();
