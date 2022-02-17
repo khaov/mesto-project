@@ -1,4 +1,4 @@
-import { ESC_KEYCODE, profile, avatar, profileAvatar, profileName, profileAbout, formSettings } from '../utils/constants.js';
+/* import { ESC_KEYCODE, profile, avatar, profileAvatar, profileName, profileAbout, formSettings } from '../utils/constants.js';
 
 import { openPopup, closePopup } from '../utils/utils.js';
 
@@ -197,3 +197,5 @@ function showState(state, button, title) {
     button.removeAttribute('disabled');
   }
 }
+
+ */

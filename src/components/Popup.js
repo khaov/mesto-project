@@ -1,10 +1,8 @@
 export default class Popup {
-  static _ESC_KEYCODE = 27;
-
   constructor(selector) {
     this._popup = document.querySelector(selector);
     this._closePopupByEsc = (evt) => { // или тут передается как отдельная ф-ия?
-      if (evt.keyCode === _ESC_KEYCODE) {
+      if (evt.keyCode === 27) {
         this.closePopup();
       }
     };
