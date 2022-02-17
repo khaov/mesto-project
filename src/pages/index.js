@@ -46,6 +46,7 @@ const cardsList = new Section({
     const card = new Card({
       data: cards,
       user: profileId,
+
       handleDeleteCard: cardId => {
         api.deleteCard(cardId)
           .then(() => card.remove())
@@ -80,7 +81,6 @@ document.querySelectorAll(formSettings.formSelector).forEach((formElement) => {
 btnEditProfile.addEventListener('click', () => {
   profileEditPopup.openPopup();
 })
-
 
 export let profileId;
 
