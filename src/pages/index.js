@@ -42,20 +42,22 @@ const profileEditPopup = new PopupWithForm({
 
 profileEditPopup.setEventListeners();
 
-
-function generateCard(cards) {
-  const card = new Card({
-    data: {...cards},
-  }, selectors.cardTemplate)
-
-  return card.createCard();
-}
+// Вывод карточек на страницу
 
 const cardsList = new Section({
-  renderer: (item) => {
-    cardsList.addItem(generateCard(item));
+  renderer: (cards) => {
+
+    const card = new Card({
+      data: {...cards},
+    }, selectors.cardTemplate)
+
+    return card.createCard();
+
   }
 }, selectors.cardList);
+
+
+
 
 
 export let profileId;
