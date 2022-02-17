@@ -1,19 +1,4 @@
-// import { profileId, api } from '../pages/index.js';
-
-// import { viewPhoto } from './modal.js';
-
-// function checkLike(card) {
-//   return card.likes.some(like => like._id === profileId);
-// }
-
-
 // export function createCard(card) {
-
-
-
-
-
-//   cardLikes.textContent = card.likes.length;
 
 //   // Photo view
 
@@ -41,11 +26,8 @@
 
 //   // Like check
 
-//   if (checkLike(card)) {
-//     likeCardButton.classList.add('card__like-button_active');
-//   }
-
 //   likeCardButton.addEventListener('click', function (evt) {
+  
 //     if (checkLike(card)) { // условие поменять на  !evt.target.classList.contains("places__btn-like_active")
 
 //       // Like remove

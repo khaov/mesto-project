@@ -15,7 +15,6 @@ const btnEditProfile = document.querySelector('.profile__edit-button');
 const btnEditAvatar = document.querySelector('.avatar__edit-button');
 const btnAddCard = document.querySelector('.profile__add-button');
 
-
 export const api = new Api(config)
 
 const profileInfo = new UserInfo(selectors.profileAvatar, selectors.profileName,  selectors.profileAbout);
@@ -42,25 +41,27 @@ const profileEditPopup = new PopupWithForm({
 
 profileEditPopup.setEventListeners();
 
-// Вывод карточек на страницу
-
 const cardsList = new Section({
   renderer: (cards) => {
-
     const card = new Card({
-      data: {...cards},
+      data: cards,
+      user: profileId,
+
+      handleAddLike: cardId => {
+        api.addLike(cardId)
+          .then(data => card.updateLikes(data))
+          .catch((error) => console.log(error));
+      },
+      handleRemoveLike: cardId => {
+        api.removeLike(cardId)
+          .then(data => card.updateLikes(data))
+          .catch((error) => console.log(error));
+      }
+
     }, selectors.cardTemplate)
-
     return card.createCard();
-
   }
 }, selectors.cardList);
-
-
-
-
-
-export let profileId;
 
 
 /* Валидация */
@@ -77,6 +78,7 @@ btnEditProfile.addEventListener('click', () => {
 })
 
 
+export let profileId;
 
 Promise.all([api.getProfile(), api.getCards()])
   .then(([profile, cards]) => {
