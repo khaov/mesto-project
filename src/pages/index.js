@@ -46,7 +46,11 @@ const cardsList = new Section({
     const card = new Card({
       data: cards,
       user: profileId,
-
+      handleDeleteCard: cardId => {
+        api.deleteCard(cardId)
+          .then(() => card.remove())
+          .catch((error) => console.log(error));
+      },
       handleAddLike: cardId => {
         api.addLike(cardId)
           .then(data => card.updateLikes(data))
