@@ -19,16 +19,15 @@ export const api = new Api(config)
 
 const profileInfo = new UserInfo(selectors.profileAvatar, selectors.profileName,  selectors.profileAbout);
 
+
 const profileEditPopup = new PopupWithForm({
   selector: '.popup_type_edit-profile',
   handleFormSubmit: ({
     profile_name,
     profile_about
   }) => {
-    console.log()
     api.saveProfile(profile_name, profile_about)
     .then((res) => {
-      console.log(res)
       profileInfo.setUserInfo(res);
       profileEditPopup.closePopup();
     })
@@ -40,6 +39,27 @@ const profileEditPopup = new PopupWithForm({
 })
 
 profileEditPopup.setEventListeners();
+
+
+const avatarEditPopup = new PopupWithForm({
+  selector: '.popup_type_edit-avatar',
+  handleFormSubmit: ({
+    avatar_link
+  }) => {
+    api.saveAvatar(avatar_link)
+    .then((res) => {
+      profileInfo.setUserInfo(res);
+      avatarEditPopup.closePopup();
+    })
+    .catch(err => console.log(err))
+    .finally(() => {
+      avatarEditPopup.setDefaultText();
+    });
+  }
+})
+
+avatarEditPopup.setEventListeners();
+
 
 const cardsList = new Section({
   renderer: (cards) => {
@@ -69,6 +89,33 @@ const cardsList = new Section({
 }, selectors.cardList);
 
 
+const viewPhotoPopup = new PopupWithImage('.popup_type_view-photo')
+
+viewPhotoPopup.setEventListeners();
+
+
+const addCardPopup = new PopupWithForm({
+  selector: '.popup_type_add-card',
+  handleFormSubmit: ({
+    card_name,
+    card_link
+  }) => {
+    api.saveCard(card_name, card_link)
+    .then((res) => {
+    console.log(res)
+
+      cardsList.addItem(res);
+      addCardPopup.closePopup();
+    })
+    .catch(err => console.log(err))
+    .finally(() => {
+      addCardPopup.setDefaultText();
+    });
+  }
+});
+
+addCardPopup.setEventListeners();
+
 /* Валидация */
 
 document.querySelectorAll(formSettings.formSelector).forEach((formElement) => {
@@ -79,8 +126,26 @@ document.querySelectorAll(formSettings.formSelector).forEach((formElement) => {
 /* Обработчики открытия попапов */
 
 btnEditProfile.addEventListener('click', () => {
+  profileEditPopup.name = profileEditPopup.getFormElement().querySelector('.form__item_type_profile-name')
+  profileEditPopup.about = profileEditPopup.getFormElement().querySelector('.form__item_type_profile-about')
+  api.getProfile()
+    .then((res) => {
+      profileEditPopup.name.value = res.name;
+      profileEditPopup.about.value = res.about;
+    })
+    .catch((error) => console.log(error));
   profileEditPopup.openPopup();
 })
+
+btnEditAvatar.addEventListener('click', () => {
+  avatarEditPopup.openPopup();
+})
+
+btnAddCard.addEventListener('click', () => {
+  addCardPopup.openPopup();
+})
+
+
 
 export let profileId;
 
