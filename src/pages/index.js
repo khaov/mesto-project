@@ -61,6 +61,11 @@ const avatarEditPopup = new PopupWithForm({
 avatarEditPopup.setEventListeners();
 
 
+const viewPhotoPopup = new PopupWithImage('.popup_type_view-photo')
+
+viewPhotoPopup.setEventListeners();
+
+
 const cardsList = new Section({
   renderer: (cardData) => {
     const card = new Card({
@@ -69,7 +74,10 @@ const cardsList = new Section({
       handleviewPhoto: (cardName, cardImage) => viewPhotoPopup.openPopup(cardName, cardImage),
       handleDeleteCard: cardId => {
         api.deleteCard(cardId)
-          .then(() => card.remove())
+          .then(() => {
+            card.getElement().remove();
+
+          })
           .catch((error) => console.log(error));
       },
       handleAddLike: cardId => {
@@ -89,11 +97,6 @@ const cardsList = new Section({
 }, selectors.cardList);
 
 
-const viewPhotoPopup = new PopupWithImage('.popup_type_view-photo')
-
-viewPhotoPopup.setEventListeners();
-
-
 const addCardPopup = new PopupWithForm({
   selector: '.popup_type_add-card',
   handleFormSubmit: ({
@@ -102,8 +105,6 @@ const addCardPopup = new PopupWithForm({
   }) => {
     api.saveCard(card_name, card_link)
     .then((res) => {
-    console.log(res)
-
       cardsList.addItem(res);
       addCardPopup.closePopup();
     })
