@@ -1,5 +1,11 @@
 export default class Card {
   constructor({ data, user, handleviewPhoto, handleDeleteCard, handleAddLike, handleRemoveLike }, cardTemplate) {
+    this._data = data;
+    this._handleviewPhoto = handleviewPhoto
+    this._handleDeleteCard = handleDeleteCard
+    this._handleAddLike = handleAddLike;
+    this._handleRemoveLike = handleRemoveLike;
+
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
@@ -7,16 +13,11 @@ export default class Card {
     this._user = user;
     this._owner = data.owner._id;
 
-    this.handleviewPhoto = handleviewPhoto
-    this._handleDeleteCard = handleDeleteCard
-    this._handleAddLike = handleAddLike;
-    this._handleRemoveLike = handleRemoveLike;
-
     this._cardId = data._id;
     this._cardTemplate = cardTemplate;
   }
 
-  // Card delete
+  // Card template
 
   _getTemplate() {
     const cardsItem = document
@@ -48,6 +49,7 @@ export default class Card {
   }
 
   _updateLikes() {
+
     const liked = Boolean(this._likes.some(like => like._id === this._user));
 
     if (liked) {
@@ -58,6 +60,8 @@ export default class Card {
 
     this._cardLikes.textContent = this._likes.length;
   }
+
+  // Event listeners
 
   _setEventListeners() {
     this._cardImage.addEventListener('click', () =>
@@ -86,8 +90,8 @@ export default class Card {
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
 
-    this._updateLikes();
     this._setEventListeners();
+    this._updateLikes();
 
     return this._card;
   }
