@@ -93,7 +93,7 @@ export default class Api {
   }
 
   // Card like remove
-  
+
   removeLike(id) {
     return fetch(`${this._baseUrl}/cards/likes/${id}`, {
       method: 'DELETE',

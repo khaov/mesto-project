@@ -62,11 +62,11 @@ avatarEditPopup.setEventListeners();
 
 
 const cardsList = new Section({
-  renderer: (cards) => {
+  renderer: (cardData) => {
     const card = new Card({
-      data: cards,
+      data: cardData,
       user: profileId,
-
+      handleviewPhoto: (cardName, cardImage) => viewPhotoPopup.openPopup(cardName, cardImage),
       handleDeleteCard: cardId => {
         api.deleteCard(cardId)
           .then(() => card.remove())
@@ -83,7 +83,7 @@ const cardsList = new Section({
           .catch((error) => console.log(error));
       }
 
-    }, selectors.cardTemplate)
+    }, selectors.cardTemplate);
     return card.createCard();
   }
 }, selectors.cardList);
@@ -144,8 +144,6 @@ btnEditAvatar.addEventListener('click', () => {
 btnAddCard.addEventListener('click', () => {
   addCardPopup.openPopup();
 })
-
-
 
 export let profileId;
 
