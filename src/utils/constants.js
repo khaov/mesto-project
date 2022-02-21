@@ -34,8 +34,8 @@ export const formSettings = {
 // Popup Selectors
 export const formSelectors = {
   editAvatar: document.querySelector('.form_type_edit-avatar'),
-  addCard: document.querySelector('.form_type_edit-profile'),
-  editProfile: document.querySelector('.form_type_add-card')
+  editProfile: document.querySelector('.form_type_edit-profile'),
+  addCard: document.querySelector('.form_type_add-card')
 }
 
 
