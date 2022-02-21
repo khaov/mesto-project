@@ -9,8 +9,6 @@ export const config = {
   }
 }
 
-// KeyCodes
-export const ESC_KEYCODE = 27;
 
 // Profile
 export const selectors = {
@@ -33,7 +31,12 @@ export const formSettings = {
   errorClass: 'form__error_visible'
 };
 
-
+// Popup Selectors
+export const formSelectors = {
+  editAvatar: document.querySelector('.form_type_edit-avatar'),
+  addCard: document.querySelector('.form_type_edit-profile'),
+  editProfile: document.querySelector('.form_type_add-card')
+}
 
 
 export const profile = document.querySelector('.profile');
