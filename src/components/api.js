@@ -1,100 +1,104 @@
-import { config } from './constants.js';
-
-// Check response from API
-
-function checkResponse(res) {
-  if (res.ok) {
-    return res.json();
+export default class Api {
+  constructor({baseUrl, headers}) {
+    this._baseUrl = baseUrl;
+    this._headers = headers;
   }
 
-  return Promise.reject(`Ошибка: ${res.status}`);
-}
+  // Check response from API
 
-// Get profile from API
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
+  }
 
-export const getProfile = () => {
-  return fetch(`${config.baseUrl}/users/me`, {
-    headers: config.headers
-  })
-    .then(checkResponse)
-}
+  // Get profile from API
 
-// Avatar save
-
-export const saveAvatar = (link) => {
-  return fetch(`${config.baseUrl}/users/me/avatar`, {
-    method: 'PATCH',
-    headers: config.headers,
-    body: JSON.stringify({
-      avatar: link
+  getProfile() {
+    return fetch(`${this._baseUrl}/users/me`, {
+      headers: this._headers,
     })
-  })
-    .then(checkResponse)
-}
+      .then(this._checkResponse)
+  }
 
-// Profile save
+  // Avatar save
 
-export const saveProfile = (name, about) => {
-  return fetch(`${config.baseUrl}/users/me`, {
-    method: 'PATCH',
-    headers: config.headers,
-    body: JSON.stringify({
-      name: name,
-      about: about
+  saveAvatar(link) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: link
+      })
     })
-  })
-    .then(checkResponse)
-}
+      .then(this._checkResponse)
+  }
 
-// Get cards from API
+  // Profile save
 
-export const getCards = () => {
-  return fetch(`${config.baseUrl}/cards`, {
-    headers: config.headers
-  })
-    .then(checkResponse)
-}
-
-// Card save
-
-export const saveCard = (name, link) => {
-  return fetch(`${config.baseUrl}/cards`, {
-    method: 'POST',
-    headers: config.headers,
-    body: JSON.stringify({
-      name: name,
-      link: link
+  saveProfile(name, about) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: name,
+        about: about
+      })
     })
-  })
-    .then(checkResponse)
-}
+      .then(this._checkResponse)
+  }
 
-// Card delete
+  // Get cards from API
 
-export const deleteCard = (id) => {
-  return fetch(`${config.baseUrl}/cards/${id}`, {
-    method: 'DELETE',
-    headers: config.headers
-  })
-    .then(checkResponse)
-}
+  getCards() {
+    return fetch(`${this._baseUrl}/cards`, {
+      headers: this._headers
+    })
+      .then(this._checkResponse)
+  }
 
-// Card like add
+  // Card save
 
-export const addLike = (id) => {
-  return fetch(`${config.baseUrl}/cards/likes/${id}`, {
-    method: 'PUT',
-    headers: config.headers
-  })
-    .then(checkResponse)
-}
+  saveCard(name, link) {
+    return fetch(`${this._baseUrl}/cards`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: name,
+        link: link
+      })
+    })
+      .then(this._checkResponse)
+  }
 
-// Card like remove
+  // Card delete
 
-export const removeLike = (id) => {
-  return fetch(`${config.baseUrl}/cards/likes/${id}`, {
-    method: 'DELETE',
-    headers: config.headers
-  })
-    .then(checkResponse)
+  deleteCard(id) {
+    return fetch(`${this._baseUrl}/cards/${id}`, {
+      method: 'DELETE',
+      headers: this._headers
+    })
+      .then(this._checkResponse)
+  }
+
+  // Card like add
+
+  addLike(id) {
+    return fetch(`${this._baseUrl}/cards/likes/${id}`, {
+      method: 'PUT',
+      headers: this._headers
+    })
+      .then(this._checkResponse)
+  }
+
+  // Card like remove
+
+  removeLike(id) {
+    return fetch(`${this._baseUrl}/cards/likes/${id}`, {
+      method: 'DELETE',
+      headers: this._headers
+    })
+      .then(this._checkResponse)
+  }
 }

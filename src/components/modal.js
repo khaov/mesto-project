@@ -1,9 +1,10 @@
-import { ESC_KEYCODE, profile, avatar, profileAvatar, profileName, profileAbout, formSettings } from './constants.js';
+/* import { ESC_KEYCODE, profile, avatar, profileAvatar, profileName, profileAbout, formSettings } from '../utils/constants.js';
 
-import { openPopup, closePopup } from './utils.js';
+import { openPopup, closePopup } from '../utils/utils.js';
 
-import { saveAvatar, saveProfile, saveCard } from './api.js';
-import { createCard, renderCard } from './card.js';
+//import { createCard, renderCard } from './card.js';
+
+import { api } from '../pages/index.js';
 
 const popups = document.querySelectorAll('.popup');
 
@@ -83,7 +84,7 @@ function editAvatar (evt) {
 
   // Avatar save
 
-  saveAvatar(avatarLinkInput.value)
+  api.saveAvatar(avatarLinkInput.value)
     .then((res) => {
 
       profileAvatar.src = res.avatar;
@@ -122,7 +123,7 @@ function editProfile (evt) {
 
   // Profile save
 
-  saveProfile(profileNameInput.value, profileAboutInput.value)
+  api.saveProfile(profileNameInput.value, profileAboutInput.value)
     .then((res) => {
 
       profileName.textContent = res.name;
@@ -159,7 +160,7 @@ export function addCard (evt) {
 
   // Card save
 
-  saveCard(cardNameInput.value, cardLinkInput.value)
+  api.saveCard(cardNameInput.value, cardLinkInput.value)
     .then((res) => {
       renderCard(createCard(res));
       addCardForm.reset();
@@ -196,3 +197,5 @@ function showState(state, button, title) {
     button.removeAttribute('disabled');
   }
 }
+
+ */
