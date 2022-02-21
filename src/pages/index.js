@@ -63,11 +63,9 @@ const avatarEditPopup = new PopupWithForm({
 
 avatarEditPopup.setEventListeners();
 
-
 const viewPhotoPopup = new PopupWithImage('.popup_type_view-photo')
 
 viewPhotoPopup.setEventListeners();
-
 
 const cardsList = new Section({
   renderer: (cardData) => {
