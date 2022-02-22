@@ -24,15 +24,11 @@ export default class PopupWithForm extends Popup {
   }
 
   _renderLoading() {
-    this._submitButton.setAttribute("disabled", true);
     this._submitButton.initValue = this._submitButton.textContent;
     this._submitButton.textContent = "Сохранение...";
   }
 
   setDefaultText() {
-    this._submitButton.classList.add('form__save-button_disabled');
-    this._submitButton.setAttribute("disabled", true);
-    //this._submitButton.removeAttribute("disabled");
     this._submitButton.textContent = this._submitButton.initValue;
   }
 

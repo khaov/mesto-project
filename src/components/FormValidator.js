@@ -23,7 +23,7 @@ export default class FormValidator {
   }
 
   resetValidation () {
-    this._buttonElement.setAttribute('disabled', true);
+    this._toggleButtonState();
     this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
     });
@@ -48,7 +48,6 @@ export default class FormValidator {
       return !inputElement.validity.valid;
     })
   }
-
 
   _toggleButtonState () {
     if (this._hasInvalidInput()) {
