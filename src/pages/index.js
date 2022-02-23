@@ -1,6 +1,6 @@
 import './index.css';
 
-import { config, selectors, formSettings } from '../utils/constants.js';
+import { config, selectors, formSettings, formSelectors } from '../utils/constants.js';
 
 import Api from '../components/Api.js';
 import PopupWithForm from '../components/PopupWithForm.js';
@@ -18,6 +18,7 @@ const btnAddCard = document.querySelector('.profile__add-button');
 export const api = new Api(config)
 
 const profileInfo = new UserInfo(selectors.profileAvatar, selectors.profileName,  selectors.profileAbout);
+
 
 
 const profileEditPopup = new PopupWithForm({
@@ -40,6 +41,8 @@ const profileEditPopup = new PopupWithForm({
 
 profileEditPopup.setEventListeners();
 
+profileEditPopup.name = profileEditPopup.getFormElement().querySelector('.form__item_type_profile-name')
+profileEditPopup.about = profileEditPopup.getFormElement().querySelector('.form__item_type_profile-about')
 
 const avatarEditPopup = new PopupWithForm({
   selector: '.popup_type_edit-avatar',
@@ -60,11 +63,9 @@ const avatarEditPopup = new PopupWithForm({
 
 avatarEditPopup.setEventListeners();
 
-
 const viewPhotoPopup = new PopupWithImage('.popup_type_view-photo')
 
 viewPhotoPopup.setEventListeners();
-
 
 const cardsList = new Section({
   renderer: (cardData) => {
@@ -119,30 +120,39 @@ addCardPopup.setEventListeners();
 
 /* Валидация */
 
-document.querySelectorAll(formSettings.formSelector).forEach((formElement) => {
-  const formValidator = new FormValidator(formElement, formSettings)
-  formValidator.enableValidation();
-});
+const formValidatorEditAvatar = new FormValidator(formSelectors.editAvatar, formSettings)
+formValidatorEditAvatar.enableValidation();
+
+const formValidatorEditProfile = new FormValidator(formSelectors.editProfile, formSettings)
+formValidatorEditProfile.enableValidation();
+
+const formValidatorAddCard = new FormValidator(formSelectors.addCard, formSettings)
+formValidatorAddCard.enableValidation();
+
+// document.querySelectorAll(formSettings.formSelector).forEach((formElement) => {
+//   const formValidator = new FormValidator(formElement, formSettings)
+//   formValidator.enableValidation();
+// });
 
 /* Обработчики открытия попапов */
 
 btnEditProfile.addEventListener('click', () => {
-  profileEditPopup.name = profileEditPopup.getFormElement().querySelector('.form__item_type_profile-name')
-  profileEditPopup.about = profileEditPopup.getFormElement().querySelector('.form__item_type_profile-about')
-  api.getProfile()
-    .then((res) => {
-      profileEditPopup.name.value = res.name;
-      profileEditPopup.about.value = res.about;
-    })
-    .catch((error) => console.log(error));
+  const activeUser = profileInfo.getUserInfo()
+
+  profileEditPopup.name.value = activeUser.name;
+  profileEditPopup.about.value = activeUser.about;
+
+  formValidatorEditProfile.resetValidation();
   profileEditPopup.openPopup();
 })
 
 btnEditAvatar.addEventListener('click', () => {
+  formValidatorEditAvatar.resetValidation();
   avatarEditPopup.openPopup();
 })
 
 btnAddCard.addEventListener('click', () => {
+  formValidatorAddCard.resetValidation();
   addCardPopup.openPopup();
 })
 
